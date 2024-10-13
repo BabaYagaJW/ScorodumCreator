@@ -6,25 +6,34 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 from Gui_Form.ui_main import Ui_MainWindow
 from Gui_Form.ui_question_round import Ui_Ques_Round
+from Sctrure_Json.Json_Sctruct import work_to_json
 
 
-class JSONTest(QMainWindow):
+class Logic(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui_quest = Ui_Ques_Round()
+        self.w_json = work_to_json()
         self.ui.setupUi(self)
-        #self.ui.Save_json.clicked.connect(self.on_save_json)
         self.ui.Add_Round.clicked.connect(self.on_add_round)
         self.ui.Del_Round.clicked.connect(self.on_del_round)
         self.ui.All_Round.doubleClicked.connect(self.on_double_click_round)
-        #self.ui.tabWidget.currentChanged.connect(self.tabChanged)
+        self.ui.Save_json.clicked.connect(self.on_save_json)
+        self.ui.tabWidget.currentChanged.connect(self.tabChanged)
         self.round_count = 0
         self.quest_select_count = 0
-        self.quest_text_count = 0
-        self.count_round = 0
 
 
+    def tabChanged(self):
+        if self.ui.tabWidget.currentIndex() == 1:
+            print("1")
+            x = self.structure_main_settings()
+            with open("test.json", "w") as f:
+                json.dump(x, f, indent=4)
+            print("correct")
+
+    #Двойное нажатие и открытие меню с каждым раундом
     def on_double_click_round(self):
         self.window = QtWidgets.QMainWindow()
         self.ui_quest.setupUi(self.window)
@@ -32,6 +41,7 @@ class JSONTest(QMainWindow):
         self.ui_quest.Add_Quest.clicked.connect(self.on_add_question)
         self.ui_quest.Del_Quest.clicked.connect(self.on_del_question)
 
+    #Кнопка добавления вопроса
     def on_add_question(self):
         if self.ui_quest.Type_Quest.currentText() == "select":
             self.quest_select_count += 1
@@ -42,6 +52,7 @@ class JSONTest(QMainWindow):
             self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(),
                                                   "Свободный ответ " + str(self.quest_text_count))
 
+    #Кнопка удаления вопроса
     def on_del_question(self):
         print("del")
         list_items = self.ui_quest.All_Question.selectedItems()
@@ -49,6 +60,7 @@ class JSONTest(QMainWindow):
         for item in list_items:
             self.ui_quest.All_Question.takeItem(self.ui_quest.All_Question.row(item))
 
+    #Кнопка добавления раунда
     def on_add_round(self):
         print(self.ui.All_Round.count())
 
@@ -62,6 +74,10 @@ class JSONTest(QMainWindow):
         else:
             self.ui.All_Round.insertItem(self.ui.All_Round.count(), "Блитц Раунд")
 
+        self.save_round_settings()
+
+
+    #Кнопка удаления раунда
     def on_del_round(self):
         list_items = self.ui.All_Round.selectedItems()
         if not list_items: return
@@ -69,12 +85,59 @@ class JSONTest(QMainWindow):
             self.ui.All_Round.takeItem(self.ui.All_Round.row(item))
             self.round_count -= 1
 
-    #def on_save_json(self):
+    def on_save_json(self):
+        print(self.ui.Name_Game.text())
+        print("test")
+        self.structure_main_settings()
+
+    def structure_main_settings(self):
+        structure_main = {
+            "game": {
+                "game_info": {
+                    "name": self.ui.Name_Game.text(),
+                    "theme": self.ui.Theme_Game.text(),
+                    "client": self.ui.Client_Game.text(),
+                    "date": self.ui.Date_Game.text(),
+                },
+                "game_settings": {
+                    "tactics": {
+                        "remove_answer": self.ui.remove_answer.value(),
+                        "one_for_all": self.ui.one_for_all.value(),
+                        "question_bet": self.ui.question_bet.value(),
+                        "all_in": self.ui.all_in.value(),
+                        "team_bet": self.ui.team_bet.value()
+                    },
+                    "skip_emails": self.ui.Mail_OnClick.isChecked()
+                }
+            }
+        }
+
+        return structure_main
+
+
+    def structure_round_settings(self):
+        structure_answer = {
+            "rounds": []
+        }
+
+        return structure_answer
+
+    def save_round_settings(self):
+        x = self.structure_main_settings()
+        y = self.structure_round_settings()
+
+        print(x)
+        print(y)
+        x["game"].update(y)
+        with open("test.json", "w") as f:
+            json.dump(x, f, indent=4)
+        print("correct")
+
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = JSONTest()
+    window = Logic()
     window.show()
 
     app.exec()
