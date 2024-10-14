@@ -1,5 +1,6 @@
 import sys
 import json
+from xml.etree.ElementPath import xpath_tokenizer
 
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
@@ -23,15 +24,20 @@ class Logic(QMainWindow):
         self.ui.tabWidget.currentChanged.connect(self.tabChanged)
         self.round_count = 0
         self.quest_select_count = 0
-
+        self.list_round = []
+        self.count_question = 0
+        self.count_round = 0
 
     def tabChanged(self):
         if self.ui.tabWidget.currentIndex() == 1:
-            print("1")
+            #print("1")
             x = self.structure_main_settings()
             with open("test.json", "w") as f:
                 json.dump(x, f, indent=4)
             print("correct")
+
+        else:
+            pass#print(self.save_round_settings())
 
     #Двойное нажатие и открытие меню с каждым раундом
     def on_double_click_round(self):
@@ -52,6 +58,8 @@ class Logic(QMainWindow):
             self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(),
                                                   "Свободный ответ " + str(self.quest_text_count))
 
+        self.save_question_settings()
+
     #Кнопка удаления вопроса
     def on_del_question(self):
         print("del")
@@ -60,9 +68,10 @@ class Logic(QMainWindow):
         for item in list_items:
             self.ui_quest.All_Question.takeItem(self.ui_quest.All_Question.row(item))
 
+
     #Кнопка добавления раунда
     def on_add_round(self):
-        print(self.ui.All_Round.count())
+        #print(self.ui.All_Round.count())
 
 
         if self.ui.Type_Round.currentText() == "classical":
@@ -122,18 +131,58 @@ class Logic(QMainWindow):
 
         return structure_answer
 
+
     def save_round_settings(self):
         x = self.structure_main_settings()
         y = self.structure_round_settings()
+        z = self.structure_question_settings()
 
-        print(x)
-        print(y)
+        if self.ui.Test_Round.isChecked():
+            self.list_round.insert(0, z)
+
+        else:
+            self.list_round.append(z)
+            
+        print(self.list_round)     
+
+        y["rounds"].append(self.list_round)
+
         x["game"].update(y)
+
         with open("test.json", "w") as f:
-            json.dump(x, f, indent=4)
-        print("correct")
+                json.dump(x, f, indent=4)
 
 
+    def del_round_settings(self):
+        x = self.structure_main_settings()
+        y = self.structure_round_settings()
+        z = self.structure_question_settings()
+        
+
+
+    def save_question_settings(self):
+        pass
+
+
+
+
+
+
+
+
+    def structure_question_settings(self):
+        structure_settings_round = {
+            "type": self.ui.Type_Round.currentText(),
+            "settings": {
+                "is_test": self.ui.Test_Round.isChecked(),
+                "name": "round_name",
+                "display_name": False,
+                "time_to_answer": self.ui.Second_Round.value(),
+                "use_special_tactics": True
+            }
+        }
+
+        return structure_settings_round
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

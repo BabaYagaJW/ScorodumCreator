@@ -153,9 +153,6 @@ class Ui_MainWindow(object):
         self.label_24 = QLabel(self.Round_Setting)
         self.label_24.setObjectName(u"label_24")
         self.label_24.setGeometry(QRect(50, 170, 81, 28))
-        self.Second_Round = QLineEdit(self.Round_Setting)
-        self.Second_Round.setObjectName(u"Second_Round")
-        self.Second_Round.setGeometry(QRect(140, 170, 70, 28))
         self.Type_Round = QComboBox(self.Round_Setting)
         self.Type_Round.addItem("")
         self.Type_Round.addItem("")
@@ -171,6 +168,18 @@ class Ui_MainWindow(object):
         self.All_Round.setObjectName(u"All_Round")
         self.All_Round.setGeometry(QRect(300, 10, 241, 261))
         self.All_Round.setEditTriggers(QAbstractItemView.EditTrigger.DoubleClicked|QAbstractItemView.EditTrigger.SelectedClicked)
+        self.Second_Round = QSpinBox(self.Round_Setting)
+        self.Second_Round.setObjectName(u"Second_Round")
+        self.Second_Round.setGeometry(QRect(140, 170, 71, 22))
+        self.Second_Round.setFocusPolicy(Qt.FocusPolicy.WheelFocus)
+        self.Second_Round.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
+        self.Second_Round.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.Second_Round.setFrame(True)
+        self.Second_Round.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
+        self.Second_Round.setKeyboardTracking(True)
+        self.Second_Round.setSingleStep(1)
+        self.Second_Round.setStepType(QAbstractSpinBox.StepType.DefaultStepType)
+        self.Second_Round.setValue(50)
         self.tabWidget.addTab(self.Round_Setting, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -179,7 +188,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -210,7 +219,6 @@ class Ui_MainWindow(object):
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0439 \u0440\u0430\u0443\u043d\u0434", None))
         self.Test_Round.setText("")
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f \u0440\u0430\u0443\u043d\u0434\u0430", None))
-        self.Second_Round.setText(QCoreApplication.translate("MainWindow", u"50", None))
         self.Type_Round.setItemText(0, QCoreApplication.translate("MainWindow", u"classical", None))
         self.Type_Round.setItemText(1, QCoreApplication.translate("MainWindow", u"blitz", None))
 

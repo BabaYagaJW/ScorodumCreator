@@ -16,6 +16,39 @@
             },
             "skip_emails": false
         },
-        "rounds": []
+        "rounds": [
+            [
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    }
+                },
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    }
+                },
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    }
+                }
+            ]
+        ]
     }
 }
