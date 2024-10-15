@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_main.ui'
+## Form generated from reading UI file 'ui_main_test.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.0
 ##
@@ -11,29 +11,56 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractSpinBox, QApplication, QCheckBox,
-    QComboBox, QLabel, QLineEdit, QListWidget,
-    QListWidgetItem, QMainWindow, QPushButton, QSizePolicy,
-    QSpinBox, QStatusBar, QTabWidget, QWidget)
+    QComboBox, QFrame, QLabel, QLineEdit,
+    QListWidget, QListWidgetItem, QMainWindow, QMenu,
+    QMenuBar, QPushButton, QSizePolicy, QSpinBox,
+    QStatusBar, QTabWidget, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(587, 355)
-        MainWindow.setStyleSheet(u"")
+        MainWindow.resize(629, 364)
+        self.actionSave = QAction(MainWindow)
+        self.actionSave.setObjectName(u"actionSave")
+        self.actionSave.setEnabled(False)
+        self.actionSave_as = QAction(MainWindow)
+        self.actionSave_as.setObjectName(u"actionSave_as")
+        self.actionSave_as.setCheckable(False)
+        self.actionSave_as.setChecked(False)
+        self.actionSave_as.setEnabled(True)
+        self.actionSave_as.setShortcutContext(Qt.ShortcutContext.WidgetWithChildrenShortcut)
+        self.actionSave_as.setAutoRepeat(False)
+        self.actionSave_as.setMenuRole(QAction.MenuRole.TextHeuristicRole)
+        self.actionSave_as.setPriority(QAction.Priority.LowPriority)
+        self.actionClose = QAction(MainWindow)
+        self.actionClose.setObjectName(u"actionClose")
+        self.actionClose.setEnabled(False)
+        self.actionNew = QAction(MainWindow)
+        self.actionNew.setObjectName(u"actionNew")
+        self.actionNew.setCheckable(False)
+        self.actionNew.setEnabled(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setGeometry(QRect(0, 0, 951, 581))
+        self.tabWidget.setMaximumSize(QSize(951, 581))
+        self.tabWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
+        self.tabWidget.setTabPosition(QTabWidget.TabPosition.North)
+        self.tabWidget.setTabShape(QTabWidget.TabShape.Triangular)
+        self.tabWidget.setElideMode(Qt.TextElideMode.ElideLeft)
+        self.tabWidget.setUsesScrollButtons(True)
+        self.tabWidget.setDocumentMode(True)
         self.tabWidget.setTabsClosable(False)
         self.tabWidget.setMovable(False)
-        self.tabWidget.setTabBarAutoHide(False)
+        self.tabWidget.setTabBarAutoHide(True)
         self.Main_Setting = QWidget()
         self.Main_Setting.setObjectName(u"Main_Setting")
         self.Mail_OnClick = QCheckBox(self.Main_Setting)
@@ -96,17 +123,6 @@ class Ui_MainWindow(object):
         self.Date_Game = QLineEdit(self.Main_Setting)
         self.Date_Game.setObjectName(u"Date_Game")
         self.Date_Game.setGeometry(QRect(90, 210, 113, 22))
-        self.Save_json = QPushButton(self.Main_Setting)
-        self.Save_json.setObjectName(u"Save_json")
-        self.Save_json.setEnabled(True)
-        self.Save_json.setGeometry(QRect(90, 270, 75, 24))
-        self.Save_json.setMouseTracking(True)
-        self.Save_json.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
-        self.Save_json.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
-        self.Save_json.setAcceptDrops(False)
-        self.Save_json.setCheckable(True)
-        self.Save_json.setAutoRepeat(True)
-        self.Save_json.setAutoDefault(True)
         self.remove_answer = QSpinBox(self.Main_Setting)
         self.remove_answer.setObjectName(u"remove_answer")
         self.remove_answer.setGeometry(QRect(430, 100, 121, 22))
@@ -167,6 +183,7 @@ class Ui_MainWindow(object):
         self.All_Round = QListWidget(self.Round_Setting)
         self.All_Round.setObjectName(u"All_Round")
         self.All_Round.setGeometry(QRect(300, 10, 241, 261))
+        self.All_Round.setFrameShape(QFrame.Shape.Box)
         self.All_Round.setEditTriggers(QAbstractItemView.EditTrigger.DoubleClicked|QAbstractItemView.EditTrigger.SelectedClicked)
         self.Second_Round = QSpinBox(self.Round_Setting)
         self.Second_Round.setObjectName(u"Second_Round")
@@ -174,21 +191,35 @@ class Ui_MainWindow(object):
         self.Second_Round.setFocusPolicy(Qt.FocusPolicy.WheelFocus)
         self.Second_Round.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
         self.Second_Round.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.Second_Round.setWrapping(True)
         self.Second_Round.setFrame(True)
         self.Second_Round.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
+        self.Second_Round.setAccelerated(True)
         self.Second_Round.setKeyboardTracking(True)
         self.Second_Round.setSingleStep(1)
         self.Second_Round.setStepType(QAbstractSpinBox.StepType.DefaultStepType)
         self.Second_Round.setValue(50)
         self.tabWidget.addTab(self.Round_Setting, "")
         MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(MainWindow)
+        self.menubar.setObjectName(u"menubar")
+        self.menubar.setGeometry(QRect(0, 0, 629, 22))
+        self.menuFile = QMenu(self.menubar)
+        self.menuFile.setObjectName(u"menuFile")
+        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menuFile.addAction(self.actionNew)
+        self.menuFile.addAction(self.actionSave)
+        self.menuFile.addAction(self.actionSave_as)
+        self.menuFile.addAction(self.actionClose)
+
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -196,6 +227,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"ScorodumCreator", None))
+        self.actionSave.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.actionSave_as.setText(QCoreApplication.translate("MainWindow", u"Save as", None))
+#if QT_CONFIG(shortcut)
+        self.actionSave_as.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+S", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionClose.setText(QCoreApplication.translate("MainWindow", u"Close", None))
+        self.actionNew.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.Mail_OnClick.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u043f\u0440\u0430\u0448\u0438\u0432\u0430\u0442\u044c \u043f\u043e\u0447\u0442\u0443 \u0443 \u0438\u0433\u0440\u043e\u043a\u043e\u0432", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0430\u043a\u0442\u0438\u043a\u0438:", None))
@@ -213,7 +251,6 @@ class Ui_MainWindow(object):
         self.Theme_Game.setText(QCoreApplication.translate("MainWindow", u"test", None))
         self.Client_Game.setText(QCoreApplication.translate("MainWindow", u"test", None))
         self.Date_Game.setText(QCoreApplication.translate("MainWindow", u"02.10.2024", None))
-        self.Save_json.setText(QCoreApplication.translate("MainWindow", u"SAVE", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Main_Setting), QCoreApplication.translate("MainWindow", u"\u041e\u0431\u0449\u0438\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0440\u0430\u0443\u043d\u0434\u0430", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0439 \u0440\u0430\u0443\u043d\u0434", None))
@@ -225,5 +262,7 @@ class Ui_MainWindow(object):
         self.Add_Round.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
         self.Del_Round.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Round_Setting), QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0443\u043d\u0434\u044b", None))
+        self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
     # retranslateUi
+
 

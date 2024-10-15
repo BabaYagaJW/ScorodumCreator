@@ -17,8 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox,
     QDialog, QLabel, QLineEdit, QListWidget,
-    QListWidgetItem, QPushButton, QSizePolicy, QTextEdit,
-    QWidget)
+    QListWidgetItem, QPushButton, QSizePolicy, QWidget)
 
 class Ui_Ques_Round(object):
     def setupUi(self, Ques_Round):
@@ -47,9 +46,6 @@ class Ui_Ques_Round(object):
         self.label_23 = QLabel(Ques_Round)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setGeometry(QRect(20, 110, 70, 28))
-        self.quest_text = QTextEdit(Ques_Round)
-        self.quest_text.setObjectName(u"quest_text")
-        self.quest_text.setGeometry(QRect(80, 110, 311, 31))
         self.label_24 = QLabel(Ques_Round)
         self.label_24.setObjectName(u"label_24")
         self.label_24.setGeometry(QRect(170, 150, 101, 28))
@@ -92,6 +88,9 @@ class Ui_Ques_Round(object):
         self.label_29 = QLabel(Ques_Round)
         self.label_29.setObjectName(u"label_29")
         self.label_29.setGeometry(QRect(370, 150, 111, 28))
+        self.quest_text = QLineEdit(Ques_Round)
+        self.quest_text.setObjectName(u"quest_text")
+        self.quest_text.setGeometry(QRect(80, 110, 311, 31))
 
         self.retranslateUi(Ques_Round)
 
@@ -119,3 +118,5 @@ class Ui_Ques_Round(object):
         self.label_29.setText(QCoreApplication.translate("Ques_Round", u"\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 \u043e\u0442\u0432\u0435\u0442", None))
     # retranslateUi
 
+    def closeEvent(self, event):
+        print("test")

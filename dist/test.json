@@ -1,0 +1,280 @@
+{
+    "game": {
+        "game_info": {
+            "name": "test",
+            "theme": "test",
+            "client": "test",
+            "date": "02.10.2024"
+        },
+        "game_settings": {
+            "tactics": {
+                "remove_answer": 10,
+                "one_for_all": 2,
+                "question_bet": 1,
+                "all_in": 1,
+                "team_bet": 1
+            },
+            "skip_emails": false
+        },
+        "rounds": [
+            [
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    },
+                    "1": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "2": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "3": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "4": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    }
+                },
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    },
+                    "1": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "2": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "3": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "4": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    "5": {
+                        "type": "select",
+                        "question": "",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 20,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "classical",
+                    "settings": {
+                        "is_test": false,
+                        "name": "round_name",
+                        "display_name": false,
+                        "time_to_answer": 50,
+                        "use_special_tactics": true
+                    }
+                }
+            ]
+        ]
+    }
+}
