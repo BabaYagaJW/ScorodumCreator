@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>629</width>
+    <width>625</width>
     <height>364</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>0</y>
       <width>951</width>
       <height>581</height>
@@ -79,9 +79,9 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>30</x>
         <y>30</y>
-        <width>181</width>
+        <width>161</width>
         <height>31</height>
        </rect>
       </property>
@@ -91,7 +91,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Запрашивать почту у игроков</string>
+       <string>Игнорировать ввод почты</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
@@ -567,7 +567,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>629</width>
+     <width>625</width>
      <height>22</height>
     </rect>
    </property>
