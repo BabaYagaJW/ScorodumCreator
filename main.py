@@ -75,7 +75,7 @@ class main(QMainWindow):
         self.ui_quest.All_Question.doubleClicked.connect(self.on_click_question)
         self.ui_quest.closeEvent(self.window)
 
-        count_round = self.ui.All_Round.currentRow()
+        rounds = self.ui.All_Round.currentRow()
         count_question = 0
 
         if self.ui.All_Round.currentItem().text() == "Блитц Раунд":
@@ -97,13 +97,14 @@ class main(QMainWindow):
             print("Выбран обычный раунд")
 
         # Найти решение исправления, ибо мешается, если там 0
-        if count_round != 0:
-            print(self.quest_dict[count_round])
-            for i in self.quest_dict[count_round]:
-                if i.get("type") == "select":
-                    self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(), "С выбором ответа")
-                else:
-                    self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(), "Свободный ответ")
+        if self.quest_dict:
+            if self.list_round[rounds]:
+                if self.quest_dict.get(rounds):
+                    for i in self.quest_dict.get(rounds):
+                        if i.get("type") == "select":
+                            self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(), "С выбором ответа")
+                        else:
+                            self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(), "Свободный ответ")
 
     def closeEvent(self, event):
         print("test")
@@ -123,6 +124,10 @@ class main(QMainWindow):
         self.ui_quest.Two_Choise.clear()
         self.ui_quest.Third_Choise.clear()
         self.ui_quest.Fourth_Choise.clear()
+        self.ui_quest.One_Correct.setChecked(False)
+        self.ui_quest.Two_Correct.setChecked(False)
+        self.ui_quest.Three_Correct.setChecked(False)
+        self.ui_quest.Fourth_Correct.setChecked(False)
 
     def on_click_question(self):
         self.ui_quest.quest_text.textEdited.connect(self.on_quest_text)
@@ -131,12 +136,12 @@ class main(QMainWindow):
         self.ui_quest.Third_Choise.textEdited.connect(self.on_three_choise)
         self.ui_quest.Fourth_Choise.textEdited.connect(self.on_fourth_choise)
 
-        count_round = self.ui.All_Round.currentRow()
+        round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
         list_items = self.ui_quest.All_Question.selectedItems()
         question_visible = []
 
-        x = self.quest_dict[count_round][count_question]
+        x = self.quest_dict[round][count_question]
         y = x.get("answers")
 
         self.ui_quest.quest_text.setText(x.get("question"))
@@ -148,14 +153,14 @@ class main(QMainWindow):
     # Для проверки изменений
 
     def on_quest_text(self):
-        count_round = self.ui.All_Round.currentRow()
+        round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
         count_add_quest = self.ui_quest.All_Question.count()
         list_items = self.ui_quest.All_Question.selectedItems()
         question_visible = []
         print(count_add_quest)
         if count_add_quest != 0:
-            x = self.quest_dict[count_round][count_question]
+            x = self.quest_dict[round][count_question]
             if self.ui_quest.quest_text.text() != x.get("question"):
                 x["question"] = self.ui_quest.quest_text.text()
             else:
@@ -180,7 +185,7 @@ class main(QMainWindow):
 
 
     def on_two_choise(self):
-        count_round = self.ui.All_Round.currentRow()
+        round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
         count_add_quest = self.ui_quest.All_Question.count()
         list_items = self.ui_quest.All_Question.selectedItems()
@@ -188,7 +193,7 @@ class main(QMainWindow):
 
         print(count_add_quest)
         if count_add_quest != 0:
-            x = self.quest_dict[count_round][count_question]
+            x = self.quest_dict[round][count_question]
             y = x.get("answers")
 
 
@@ -199,7 +204,7 @@ class main(QMainWindow):
 
 
     def on_three_choise(self):
-        count_round = self.ui.All_Round.currentRow()
+        round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
         count_add_quest = self.ui_quest.All_Question.count()
         list_items = self.ui_quest.All_Question.selectedItems()
@@ -207,7 +212,7 @@ class main(QMainWindow):
 
         print(count_add_quest)
         if count_add_quest != 0:
-            x = self.quest_dict[count_round][count_question]
+            x = self.quest_dict[round][count_question]
             y = x.get("answers")
 
             if self.ui_quest.Third_Choise.text() != y[2]:
@@ -217,7 +222,7 @@ class main(QMainWindow):
 
 
     def on_fourth_choise(self):
-        count_round = self.ui.All_Round.currentRow()
+        round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
         count_add_quest = self.ui_quest.All_Question.count()
         list_items = self.ui_quest.All_Question.selectedItems()
@@ -225,7 +230,7 @@ class main(QMainWindow):
 
         print(count_add_quest)
         if count_add_quest != 0:
-            x = self.quest_dict[count_round][count_question]
+            x = self.quest_dict[round][count_question]
             y = x.get("answers")
             if self.ui_quest.Fourth_Choise.text() != y[3]:
                 y[3] = self.ui_quest.Fourth_Choise.text()
