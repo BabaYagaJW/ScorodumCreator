@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Вопросы для раунда</string>
+   <string>Вопросы раунда</string>
   </property>
   <widget class="QListWidget" name="All_Question">
    <property name="geometry">
@@ -58,14 +58,14 @@
   <widget class="QLabel" name="label_22">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>139</x>
      <y>60</y>
-     <width>70</width>
+     <width>71</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>Тип раунда</string>
+    <string>Тип вопроса</string>
    </property>
   </widget>
   <widget class="QComboBox" name="Type_Quest">
@@ -279,6 +279,9 @@
      <width>311</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

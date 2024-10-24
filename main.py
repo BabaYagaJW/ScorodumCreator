@@ -61,7 +61,7 @@ class main(QMainWindow):
                     self.round_dict["rounds"][i].update(self.result_dict)
 
             x["game"].update(self.round_dict)
-            file_path_credentials = os.path.join(os.path.dirname(__file__), "test.json")
+            file_path_credentials = os.path.join(os.path.dirname(__file__), "scenarion.json")
             with open(file_path_credentials, "w", encoding='utf8') as f:
                 json.dump(x, f, indent=4, ensure_ascii=False)
 
@@ -73,7 +73,12 @@ class main(QMainWindow):
         self.ui_quest.Add_Quest.clicked.connect(self.on_add_question)
         self.ui_quest.Del_Quest.clicked.connect(self.on_del_question)
         self.ui_quest.All_Question.doubleClicked.connect(self.on_click_question)
-        self.ui_quest.closeEvent(self.window)
+        self.ui_quest.One_Correct.clicked.connect(self.on_one_correct)
+        self.ui_quest.Two_Correct.clicked.connect(self.on_two_correct)
+        self.ui_quest.Three_Correct.clicked.connect(self.on_three_correct)
+        self.ui_quest.Fourth_Correct.clicked.connect(self.on_fourth_correct)
+        #self.ui_quest.Type_Quest.clicked.connect(self.on_type_quests)
+       # self.ui_quest.closeEvent(self.window)
 
         rounds = self.ui.All_Round.currentRow()
         count_question = 0
@@ -106,8 +111,55 @@ class main(QMainWindow):
                         else:
                             self.ui_quest.All_Question.insertItem(self.ui_quest.All_Question.count(), "Свободный ответ")
 
+
+    def on_type_quest(self):
+        print('test')
+
     def closeEvent(self, event):
         print("test")
+
+    #Нажатие на кнопку с отметкой о правильном ответе
+
+    def on_one_correct(self):
+        if self.ui_quest.One_Correct.isChecked():
+            self.ui_quest.Two_Correct.setEnabled(False)
+            self.ui_quest.Three_Correct.setEnabled(False)
+            self.ui_quest.Fourth_Correct.setEnabled(False)
+        else:
+            self.ui_quest.Two_Correct.setEnabled(True)
+            self.ui_quest.Three_Correct.setEnabled(True)
+            self.ui_quest.Fourth_Correct.setEnabled(True)
+
+    def on_two_correct(self):
+        if self.ui_quest.Two_Correct.isChecked():
+            self.ui_quest.One_Correct.setEnabled(False)
+            self.ui_quest.Three_Correct.setEnabled(False)
+            self.ui_quest.Fourth_Correct.setEnabled(False)
+        else:
+            self.ui_quest.One_Correct.setEnabled(True)
+            self.ui_quest.Three_Correct.setEnabled(True)
+            self.ui_quest.Fourth_Correct.setEnabled(True)
+
+    def on_three_correct(self):
+        if self.ui_quest.Three_Correct.isChecked():
+            self.ui_quest.Two_Correct.setEnabled(False)
+            self.ui_quest.One_Correct.setEnabled(False)
+            self.ui_quest.Fourth_Correct.setEnabled(False)
+        else:
+            self.ui_quest.Two_Correct.setEnabled(True)
+            self.ui_quest.One_Correct.setEnabled(True)
+            self.ui_quest.Fourth_Correct.setEnabled(True)
+
+    def on_fourth_correct(self):
+        if self.ui_quest.Fourth_Correct.isChecked():
+            self.ui_quest.Two_Correct.setEnabled(False)
+            self.ui_quest.Three_Correct.setEnabled(False)
+            self.ui_quest.One_Correct.setEnabled(False)
+        else:
+            self.ui_quest.Two_Correct.setEnabled(True)
+            self.ui_quest.Three_Correct.setEnabled(True)
+            self.ui_quest.One_Correct.setEnabled(True)
+
 
     # Кнопка добавления вопроса
     def on_add_question(self):
@@ -124,9 +176,13 @@ class main(QMainWindow):
         self.ui_quest.Two_Choise.clear()
         self.ui_quest.Third_Choise.clear()
         self.ui_quest.Fourth_Choise.clear()
+        self.ui_quest.One_Correct.setEnabled(True)
         self.ui_quest.One_Correct.setChecked(False)
+        self.ui_quest.Two_Correct.setEnabled(True)
         self.ui_quest.Two_Correct.setChecked(False)
+        self.ui_quest.Three_Correct.setEnabled(True)
         self.ui_quest.Three_Correct.setChecked(False)
+        self.ui_quest.Fourth_Correct.setEnabled(True)
         self.ui_quest.Fourth_Correct.setChecked(False)
 
     def on_click_question(self):
@@ -318,7 +374,6 @@ class main(QMainWindow):
             else:
                 self.quest_dict.update({count_items: self.list_quest})
         else:
-
             if self.ui_quest.One_Correct.isChecked():
                 self.correct_answer = self.ui_quest.First_Choise.text()
             elif self.ui_quest.Two_Correct.isChecked():

@@ -23,7 +23,7 @@ class Ui_Ques_Round(object):
     def setupUi(self, Ques_Round):
         if not Ques_Round.objectName():
             Ques_Round.setObjectName(u"Ques_Round")
-        Ques_Round.resize(760, 408)
+        Ques_Round.resize(756, 400)
         self.All_Question = QListWidget(Ques_Round)
         self.All_Question.setObjectName(u"All_Question")
         self.All_Question.setGeometry(QRect(500, 20, 241, 341))
@@ -37,7 +37,7 @@ class Ui_Ques_Round(object):
         self.Del_Quest.setGeometry(QRect(650, 370, 75, 24))
         self.label_22 = QLabel(Ques_Round)
         self.label_22.setObjectName(u"label_22")
-        self.label_22.setGeometry(QRect(140, 60, 70, 28))
+        self.label_22.setGeometry(QRect(139, 60, 71, 28))
         self.Type_Quest = QComboBox(Ques_Round)
         self.Type_Quest.addItem("")
         self.Type_Quest.addItem("")
@@ -91,6 +91,7 @@ class Ui_Ques_Round(object):
         self.quest_text = QLineEdit(Ques_Round)
         self.quest_text.setObjectName(u"quest_text")
         self.quest_text.setGeometry(QRect(80, 110, 311, 31))
+        self.quest_text.setClearButtonEnabled(False)
 
         self.retranslateUi(Ques_Round)
 
@@ -98,10 +99,10 @@ class Ui_Ques_Round(object):
     # setupUi
 
     def retranslateUi(self, Ques_Round):
-        Ques_Round.setWindowTitle(QCoreApplication.translate("Ques_Round", u"\u0412\u043e\u043f\u0440\u043e\u0441\u044b \u0434\u043b\u044f \u0440\u0430\u0443\u043d\u0434\u0430", None))
+        Ques_Round.setWindowTitle(QCoreApplication.translate("Ques_Round", u"\u0412\u043e\u043f\u0440\u043e\u0441\u044b \u0440\u0430\u0443\u043d\u0434\u0430", None))
         self.Add_Quest.setText(QCoreApplication.translate("Ques_Round", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
         self.Del_Quest.setText(QCoreApplication.translate("Ques_Round", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
-        self.label_22.setText(QCoreApplication.translate("Ques_Round", u"\u0422\u0438\u043f \u0440\u0430\u0443\u043d\u0434\u0430", None))
+        self.label_22.setText(QCoreApplication.translate("Ques_Round", u"\u0422\u0438\u043f \u0432\u043e\u043f\u0440\u043e\u0441\u0430", None))
         self.Type_Quest.setItemText(0, QCoreApplication.translate("Ques_Round", u"select", None))
         self.Type_Quest.setItemText(1, QCoreApplication.translate("Ques_Round", u"text", None))
 
@@ -118,5 +119,3 @@ class Ui_Ques_Round(object):
         self.label_29.setText(QCoreApplication.translate("Ques_Round", u"\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 \u043e\u0442\u0432\u0435\u0442", None))
     # retranslateUi
 
-    def closeEvent(self, event):
-        print("test")
