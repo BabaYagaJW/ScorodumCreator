@@ -10,10 +10,10 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialo
 
 from Gui_Form.ui_main import Ui_MainWindow
 from Gui_Form.ui_question_round import Ui_Ques_Round
-#from Sctrure_Json.Json_Sctruct import work_to_json
+from Sctrure_Json.JsonStruct import JsonStruct
 
 
-class main(QMainWindow):
+class MainLogic(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -44,8 +44,17 @@ class main(QMainWindow):
 
     # Переключение между вкладками
     def tabChanged(self):
-        x = self.structure_main_settings()
-        z = self.structure_round()
+        x = JsonStruct.structure_main_settings(self,
+                                               self.ui.Name_Game.text(),
+                                               self.ui.Theme_Game.text(),
+                                               self.ui.Client_Game.text(),
+                                               self.ui.Date_Game.text(),
+                                               self.ui.remove_answer.value(),
+                                               self.ui.one_for_all.value(),
+                                               self.ui.question_bet.value(),
+                                               self.ui.all_in.value(),
+                                               self.ui.team_bet.value(),
+                                               self.ui.Mail_OnClick.isChecked())
 
         if self.ui.tabWidget.currentIndex() == 1:
             pass
@@ -324,9 +333,10 @@ class main(QMainWindow):
 
     # Кнопка удаления раунда и удаление его из JSON
     def on_del_round(self):
-        x = self.structure_main_settings()
-        y = self.structure_round()
-        z = self.structure_round_settings()
+        z = JsonStruct.structure_round_settings(self,
+                                                self.ui.Type_Round.currentText(),
+                                                self.ui.Test_Round.isChecked(),
+                                                self.ui.Second_Round.value())
         list_items = self.ui.All_Round.selectedItems()
         self.count_round = self.ui.All_Round.currentRow()
         if not list_items: return
@@ -352,7 +362,10 @@ class main(QMainWindow):
 
     # Сохранение настроек раунда в JSON
     def save_round_settings(self):
-        z = self.structure_round_settings()
+        z = JsonStruct.structure_round_settings(self,
+                                                self.ui.Type_Round.currentText(),
+                                                self.ui.Test_Round.isChecked(),
+                                                self.ui.Second_Round.value())
 
         if self.ui.Test_Round.isChecked():
             self.list_round.insert(0, z)
@@ -365,7 +378,9 @@ class main(QMainWindow):
         count_items_queston = self.ui_quest.All_Question.currentRow()
 
         if self.ui.All_Round.currentItem().text() == "Блитц Раунд":
-            z = self.structure_blitz_round()
+            z = JsonStruct.structure_blitz_round(self,
+                                                 self.ui_quest.quest_text.text(),
+                                                 self.ui_quest.First_Choise.text())
 
             self.list_quest.append(z)
 
@@ -383,7 +398,14 @@ class main(QMainWindow):
             else:
                 self.correct_answer = self.ui_quest.Fourth_Choise.text()
 
-            z = self.structure_question_settings()
+            z = JsonStruct.structure_question_settings(self,
+                                                       self.ui_quest.Type_Quest.currentText(),
+                                                       self.ui_quest.quest_text.text(),
+                                                       self.ui_quest.First_Choise.text(),
+                                                       self.ui_quest.Two_Choise.text(),
+                                                       self.ui_quest.Third_Choise.text(),
+                                                       self.ui_quest.Fourth_Choise.text(),
+                                                       self.correct_answer)
 
             self.list_quest.append(z)
 
@@ -394,101 +416,10 @@ class main(QMainWindow):
 
             print(self.quest_dict)
 
-    # функции для структуры JSON
-    def structure_round_settings(self):
-        structure_settings_round = {
-            "type": self.ui.Type_Round.currentText(),
-            "settings": {
-                "is_test": self.ui.Test_Round.isChecked(),
-                "name": "round_name",
-                "display_name": False,
-                "time_to_answer": self.ui.Second_Round.value(),
-                "use_special_tactics": True
-            },
-        }
-
-        return structure_settings_round
-
-    def structure_main_settings(self):
-        structure_main = {
-            "game": {
-                "game_info": {
-                    "name": self.ui.Name_Game.text(),
-                    "theme": self.ui.Theme_Game.text(),
-                    "client": self.ui.Client_Game.text(),
-                    "date": self.ui.Date_Game.text(),
-                },
-                "game_settings": {
-                    "tactics": {
-                        "remove_answer": self.ui.remove_answer.value(),
-                        "one_for_all": self.ui.one_for_all.value(),
-                        "question_bet": self.ui.question_bet.value(),
-                        "all_in": self.ui.all_in.value(),
-                        "team_bet": self.ui.team_bet.value()
-                    },
-                    "skip_emails": self.ui.Mail_OnClick.isChecked()
-                },
-            }
-        }
-
-        return structure_main
-
-    def structure_round(self):
-        structure_answer = {
-            "rounds": []
-        }
-
-        return structure_answer
-
-    def structure_question(self):
-        structure_question = {
-            "questions": []
-        }
-
-        return structure_question
-
-    def structure_question_settings(self):
-        structure_quest_settings = {
-            "type": self.ui_quest.Type_Quest.currentText(),
-            "question": self.ui_quest.quest_text.text(),
-            "answers": [
-                self.ui_quest.First_Choise.text(),
-                self.ui_quest.Two_Choise.text(),
-                self.ui_quest.Third_Choise.text(),
-                self.ui_quest.Fourth_Choise.text()
-            ],
-            "correct_answer": self.correct_answer,
-            "time_to_answer": 20,
-            "media_data": {
-                "show_image": False,
-                "video": {
-                    "before": "",
-                    "after": ""
-                },
-                "image": {
-                    "before": "",
-                    "after": "",
-                    "player_displayed": False
-                }
-            }
-        }
-
-        return structure_quest_settings
-
-    def structure_blitz_round(self):
-        structure_blitz_round = {
-            "id": 0,
-            "type": "text",
-            "question": self.ui_quest.quest_text.text(),
-            "correct_answer": self.ui_quest.First_Choise.text()
-        }
-
-        return structure_blitz_round
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = main()
+    window = MainLogic()
     window.show()
 
     app.exec()
