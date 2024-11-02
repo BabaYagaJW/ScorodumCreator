@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>625</width>
-    <height>364</height>
+    <width>629</width>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -549,6 +549,9 @@
       <property name="keyboardTracking">
        <bool>true</bool>
       </property>
+      <property name="maximum">
+       <number>300</number>
+      </property>
       <property name="singleStep">
        <number>1</number>
       </property>
@@ -559,6 +562,65 @@
        <number>50</number>
       </property>
      </widget>
+     <widget class="QSpinBox" name="Blitz_Score">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>220</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::WheelFocus</enum>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LayoutDirection::LeftToRight</enum>
+      </property>
+      <property name="wrapping">
+       <bool>true</bool>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+      </property>
+      <property name="accelerated">
+       <bool>true</bool>
+      </property>
+      <property name="keyboardTracking">
+       <bool>true</bool>
+      </property>
+      <property name="maximum">
+       <number>300</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Blitz_label">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>220</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Очки блиц</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -567,7 +629,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>625</width>
+     <width>629</width>
      <height>22</height>
     </rect>
    </property>

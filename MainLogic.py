@@ -10,10 +10,12 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialo
 
 from Gui_Form.ui_main import Ui_MainWindow
 from Gui_Form.ui_question_round import Ui_Ques_Round
+from Gui_Form.test_form import Ui_Test_Form
+from Gui_Form.test_form_2 import Ui_Dialog
 from Sctrure_Json.JsonStruct import JsonStruct
 
 
-class MainLogic(QMainWindow):
+class MainLog(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -73,10 +75,39 @@ class MainLogic(QMainWindow):
             file_path_credentials = os.path.join(os.path.dirname(__file__), "scenarion.json")
             with open(file_path_credentials, "w", encoding='utf8') as f:
                 json.dump(x, f, indent=4, ensure_ascii=False)
+    def on_add_round(self):
+        # print(self.ui.All_Round.count())
+
+        if self.ui.Type_Round.currentText() == "classical":
+            if self.ui.Test_Round.isChecked():
+                self.ui.All_Round.insertItem(0, "Тестовый раунд")
+            else:
+                self.round_count += 1
+                self.ui.All_Round.insertItem(self.ui.All_Round.count(), "Раунд " + str(self.round_count))
+        else:
+            self.ui.All_Round.insertItem(self.ui.All_Round.count(), "Блитц Раунд")
+
+        self.save_round_settings()
+        self.list_quest = []
+
+        # Кнопка удаления раунда и удаление его из JSON
+    def on_del_round(self):
+        z = JsonStruct.structure_round_settings(self,
+                                                self.ui.Type_Round.currentText(),
+                                                self.ui.Test_Round.isChecked(),
+                                                self.ui.Second_Round.value())
+        list_items = self.ui.All_Round.selectedItems()
+        self.count_round = self.ui.All_Round.currentRow()
+        if not list_items: return
+        for item in list_items:
+            self.ui.All_Round.takeItem(self.ui.All_Round.row(item))
+            self.round_ -= 1
+            self.list_round.pop(self.count_round)
 
     # Двойное нажатие и открытие меню с каждым раундом
     def on_double_click_round(self):
         self.window = QtWidgets.QMainWindow()
+        self.ui_quest = Ui_Ques_Round()
         self.ui_quest.setupUi(self.window)
         self.window.show()
         self.ui_quest.Add_Quest.clicked.connect(self.on_add_question)
@@ -86,8 +117,7 @@ class MainLogic(QMainWindow):
         self.ui_quest.Two_Correct.clicked.connect(self.on_two_correct)
         self.ui_quest.Three_Correct.clicked.connect(self.on_three_correct)
         self.ui_quest.Fourth_Correct.clicked.connect(self.on_fourth_correct)
-        #self.ui_quest.Type_Quest.clicked.connect(self.on_type_quests)
-       # self.ui_quest.closeEvent(self.window)
+        self.ui_quest.Save_Question.clicked.connect(self.on_save_question)
 
         rounds = self.ui.All_Round.currentRow()
         count_question = 0
@@ -195,11 +225,9 @@ class MainLogic(QMainWindow):
         self.ui_quest.Fourth_Correct.setChecked(False)
 
     def on_click_question(self):
-        self.ui_quest.quest_text.textEdited.connect(self.on_quest_text)
-        self.ui_quest.First_Choise.textEdited.connect(self.on_one_choise)
-        self.ui_quest.Two_Choise.textEdited.connect(self.on_two_choise)
-        self.ui_quest.Third_Choise.textEdited.connect(self.on_three_choise)
-        self.ui_quest.Fourth_Choise.textEdited.connect(self.on_fourth_choise)
+        self.ui_quest.Add_Quest.setVisible(False)
+        self.ui_quest.Del_Quest.setVisible(False)
+        self.ui_quest.Save_Question.setVisible(True)
 
         round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
@@ -209,98 +237,79 @@ class MainLogic(QMainWindow):
         x = self.quest_dict[round][count_question]
         y = x.get("answers")
 
+        self.ui_quest.One_Correct.setEnabled(True)
+        self.ui_quest.One_Correct.setChecked(False)
+        self.ui_quest.Two_Correct.setEnabled(True)
+        self.ui_quest.Two_Correct.setChecked(False)
+        self.ui_quest.Three_Correct.setEnabled(True)
+        self.ui_quest.Three_Correct.setChecked(False)
+        self.ui_quest.Fourth_Correct.setEnabled(True)
+        self.ui_quest.Fourth_Correct.setChecked(False)
+
         self.ui_quest.quest_text.setText(x.get("question"))
         self.ui_quest.First_Choise.setText(y[0])
         self.ui_quest.Two_Choise.setText(y[1])
         self.ui_quest.Third_Choise.setText(y[2])
         self.ui_quest.Fourth_Choise.setText(y[3])
 
-    # Для проверки изменений
+        if x.get("correct_answer") == y[0]:
+            self.ui_quest.One_Correct.setChecked(True)
+            self.ui_quest.Two_Correct.setEnabled(False)
+            self.ui_quest.Three_Correct.setEnabled(False)
+            self.ui_quest.Fourth_Correct.setEnabled(False)
+        elif x.get("correct_answer") == y[1]:
+            self.ui_quest.Two_Correct.setChecked(True)
+            self.ui_quest.One_Correct.setEnabled(False)
+            self.ui_quest.Three_Correct.setEnabled(False)
+            self.ui_quest.Fourth_Correct.setEnabled(False)
+        elif x.get("correct_answer") == y[2]:
+            self.ui_quest.Three_Correct.setChecked(True)
+            self.ui_quest.Two_Correct.setEnabled(False)
+            self.ui_quest.One_Correct.setEnabled(False)
+            self.ui_quest.Fourth_Correct.setEnabled(False)
+        else:
+            self.ui_quest.Fourth_Correct.setChecked(True)
+            self.ui_quest.Two_Correct.setEnabled(False)
+            self.ui_quest.Three_Correct.setEnabled(False)
+            self.ui_quest.One_Correct.setEnabled(False)
 
-    def on_quest_text(self):
+    def on_save_question(self):
         round = self.ui.All_Round.currentRow()
         count_question = self.ui_quest.All_Question.currentRow()
         count_add_quest = self.ui_quest.All_Question.count()
         list_items = self.ui_quest.All_Question.selectedItems()
-        question_visible = []
-        print(count_add_quest)
-        if count_add_quest != 0:
-            x = self.quest_dict[round][count_question]
-            if self.ui_quest.quest_text.text() != x.get("question"):
-                x["question"] = self.ui_quest.quest_text.text()
-            else:
-                print('Изменений нет')
 
+        print("Сохранение вопроса")
 
+        x = self.quest_dict[round][count_question]
+        y = x.get("answers")
 
-    def on_one_choise(self):
-        count_round = self.ui.All_Round.currentRow()
-        count_question = self.ui_quest.All_Question.currentRow()
-        count_add_quest = self.ui_quest.All_Question.count()
-        list_items = self.ui_quest.All_Question.selectedItems()
-        question_visible = []
-        print(count_add_quest)
-        if count_add_quest != 0:
-            x = self.quest_dict[count_round][count_question]
-            y = x.get("answers")
-            if self.ui_quest.First_Choise.text() != y[0]:
-                y[0] = self.ui_quest.First_Choise.text()
-            else:
-                print('Изменений нет')
+        if self.ui_quest.quest_text.text() != x.get("question"):
+            x["question"] = self.ui_quest.quest_text.text()
+            print("Изменили вопрос")
+        elif self.ui_quest.First_Choise.text() != y[0]:
+            y[0] = self.ui_quest.First_Choise.text()
+            print("Изменили первый вариант ответа")
+        elif self.ui_quest.Two_Choise.text() != y[1]:
+            y[1] = self.ui_quest.Two_Choise.text()
+            print("Изменили второй вариант ответа")
+        elif self.ui_quest.Third_Choise.text() != y[2]:
+            y[2] = self.ui_quest.Third_Choise.text()
+            print("Изменили третий вариант ответа")
+        elif self.ui_quest.Fourth_Choise.text() != y[3]:
+            y[3] = self.ui_quest.Fourth_Choise.text()
+            print("Изменили четвертый вариант ответа")
+        elif self.ui_quest.One_Correct.text() != y[0]:
+            print('Изменений нет')
 
-
-    def on_two_choise(self):
-        round = self.ui.All_Round.currentRow()
-        count_question = self.ui_quest.All_Question.currentRow()
-        count_add_quest = self.ui_quest.All_Question.count()
-        list_items = self.ui_quest.All_Question.selectedItems()
-        question_visible = []
-
-        print(count_add_quest)
-        if count_add_quest != 0:
-            x = self.quest_dict[round][count_question]
-            y = x.get("answers")
-
-
-            if self.ui_quest.Two_Choise.text() != y[1]:
-                y[1] = self.ui_quest.Two_Choise.text()
-            else:
-                print('Изменений нет')
-
-
-    def on_three_choise(self):
-        round = self.ui.All_Round.currentRow()
-        count_question = self.ui_quest.All_Question.currentRow()
-        count_add_quest = self.ui_quest.All_Question.count()
-        list_items = self.ui_quest.All_Question.selectedItems()
-        question_visible = []
-
-        print(count_add_quest)
-        if count_add_quest != 0:
-            x = self.quest_dict[round][count_question]
-            y = x.get("answers")
-
-            if self.ui_quest.Third_Choise.text() != y[2]:
-                y[2] = self.ui_quest.Third_Choise.text()
-            else:
-                print('Изменений нет')
-
-
-    def on_fourth_choise(self):
-        round = self.ui.All_Round.currentRow()
-        count_question = self.ui_quest.All_Question.currentRow()
-        count_add_quest = self.ui_quest.All_Question.count()
-        list_items = self.ui_quest.All_Question.selectedItems()
-        question_visible = []
-
-        print(count_add_quest)
-        if count_add_quest != 0:
-            x = self.quest_dict[round][count_question]
-            y = x.get("answers")
-            if self.ui_quest.Fourth_Choise.text() != y[3]:
-                y[3] = self.ui_quest.Fourth_Choise.text()
-            else:
-                print('Изменений нет')
+        self.ui_quest.quest_text.clear()
+        self.ui_quest.First_Choise.clear()
+        self.ui_quest.Two_Choise.clear()
+        self.ui_quest.Third_Choise.clear()
+        self.ui_quest.Fourth_Choise.clear()
+        self.ui_quest.Add_Quest.setVisible(True)
+        self.ui_quest.Del_Quest.setVisible(True)
+        self.ui_quest.Save_Question.setVisible(False)
 
 
     # Кнопка удаления вопроса
@@ -315,42 +324,14 @@ class MainLogic(QMainWindow):
             # del self.quest_dict[count_items][self.count_question]
         print("Успешное удаление")
 
-    # Кнопка добавления раунда
-    def on_add_round(self):
-        # print(self.ui.All_Round.count())
 
-        if self.ui.Type_Round.currentText() == "classical":
-            if self.ui.Test_Round.isChecked():
-                self.ui.All_Round.insertItem(0, "Тестовый раунд")
-            else:
-                self.round_count += 1
-                self.ui.All_Round.insertItem(self.ui.All_Round.count(), "Раунд " + str(self.round_count))
-        else:
-            self.ui.All_Round.insertItem(self.ui.All_Round.count(), "Блитц Раунд")
-
-        self.save_round_settings()
-        self.list_quest = []
-
-    # Кнопка удаления раунда и удаление его из JSON
-    def on_del_round(self):
-        z = JsonStruct.structure_round_settings(self,
-                                                self.ui.Type_Round.currentText(),
-                                                self.ui.Test_Round.isChecked(),
-                                                self.ui.Second_Round.value())
-        list_items = self.ui.All_Round.selectedItems()
-        self.count_round = self.ui.All_Round.currentRow()
-        if not list_items: return
-        for item in list_items:
-            self.ui.All_Round.takeItem(self.ui.All_Round.row(item))
-            self.round_ -= 1
-            self.list_round.pop(self.count_round)
 
     # сохранение через верхнюю вкладку (доработка требуется!)
     def on_save_json(self):
         title = 'Сохранить файл как'
         directory = r'C:\Users\Home\scenario.json'
         filter_file = "Json_File *json"
-        embedded_file_path = "C:/Users/andre/PycharmProjects/ScorodumCreator/test.json"
+        embedded_file_path = os.path.join(os.path.dirname(__file__), "scenarion.json")
         options = QFileDialog.Options()
         dest_file, _ = QFileDialog.getSaveFileName(self, title, directory, "All Files (*)", options=options)
         if dest_file:

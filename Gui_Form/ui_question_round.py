@@ -23,7 +23,7 @@ class Ui_Ques_Round(object):
     def setupUi(self, Ques_Round):
         if not Ques_Round.objectName():
             Ques_Round.setObjectName(u"Ques_Round")
-        Ques_Round.resize(756, 400)
+        Ques_Round.resize(752, 400)
         self.All_Question = QListWidget(Ques_Round)
         self.All_Question.setObjectName(u"All_Question")
         self.All_Question.setGeometry(QRect(500, 20, 241, 341))
@@ -92,6 +92,10 @@ class Ui_Ques_Round(object):
         self.quest_text.setObjectName(u"quest_text")
         self.quest_text.setGeometry(QRect(80, 110, 311, 31))
         self.quest_text.setClearButtonEnabled(False)
+        self.Save_Question = QPushButton(Ques_Round)
+        self.Save_Question.setObjectName(u"Save_Question")
+        self.Save_Question.setVisible(False)
+        self.Save_Question.setGeometry(QRect(590, 370, 75, 24))
 
         self.retranslateUi(Ques_Round)
 
@@ -117,5 +121,6 @@ class Ui_Ques_Round(object):
         self.Three_Correct.setText("")
         self.Fourth_Correct.setText("")
         self.label_29.setText(QCoreApplication.translate("Ques_Round", u"\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 \u043e\u0442\u0432\u0435\u0442", None))
+        self.Save_Question.setText(QCoreApplication.translate("Ques_Round", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
     # retranslateUi
 

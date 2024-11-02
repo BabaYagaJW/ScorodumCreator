@@ -17,6 +17,20 @@ class JsonStruct():
 
         return structure_settings_round
 
+    def structure_blitz_round(self, Type_Round, Test_Round, Second_Round, Blitz_Score):
+        structure_blitz_round = {
+            "type": Type_Round,
+            "settings": {
+                "is_test": Test_Round,
+                "name": "round_name",
+                "display_name": False,
+                "time_to_answer": Second_Round,
+                "blitz_score": Blitz_Score
+            },
+        }
+
+        return structure_blitz_round
+
     def structure_main_settings(self, Name_Game, Theme_Game, Client_Game, Date_Game, remove_answer, one_for_all,
                                 question_bet, all_in, team_bet, Mail_OnClick):
         structure_main = {
@@ -85,15 +99,15 @@ class JsonStruct():
 
         return structure_quest_settings
 
-    def structure_blitz_round(self, quest_text, First_Choise):
-        structure_blitz_round = {
-            "id": 0,
+    def structure_blitz_question(self, number, quest_text, First_Choise):
+        structure_blitz_question = {
+            "id": number,
             "type": "text",
             "question": quest_text,
             "correct_answer": First_Choise
         }
 
-        return structure_blitz_round
+        return structure_blitz_question
 
     def test(self):
         print(self.structure_round_settings("test", "test", "test"))

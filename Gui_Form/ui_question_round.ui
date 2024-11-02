@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>756</width>
-    <height>400</height>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -282,6 +282,19 @@
    </property>
    <property name="clearButtonEnabled">
     <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Save_Question">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>370</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Сохранить</string>
    </property>
   </widget>
  </widget>
