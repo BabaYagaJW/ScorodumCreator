@@ -144,14 +144,25 @@ class MainLogic(QMainWindow):
 
     # Сохранение через бар меню
     def on_save_json(self):
+        x = JsonStruct.structure_main_settings(self.ui.Name_Game.text(),
+                                               self.ui.Theme_Game.text(),
+                                               self.ui.Client_Game.text(),
+                                               self.ui.Date_Game.text(),
+                                               self.ui.remove_answer.value(),
+                                               self.ui.one_for_all.value(),
+                                               self.ui.question_bet.value(),
+                                               self.ui.all_in.value(),
+                                               self.ui.team_bet.value(),
+                                               self.ui.Mail_OnClick.isChecked())
+
         x["game"].update(self.round_dict)
-        file_path_credentials = os.path.join(os.path.dirname("ScorodumCreator"), "scenarion.json")
+        file_path_credentials = os.path.join(os.path.dirname("ScorodumCreator"), "scenario.json")
         with open(file_path_credentials, "w", encoding='utf8') as f:
             json.dump(x, f, indent=4, ensure_ascii=False)
 
         title = 'Сохранить файл как'
         directory = r'scenario.json'
-        embedded_file_path = os.path.join(os.path.dirname("ScorodumCreator"), "scenarion.json")
+        embedded_file_path = os.path.join(os.path.dirname("ScorodumCreator"), "scenario.json")
         options = QFileDialog.Options()
         dest_file, _ = QFileDialog.getSaveFileName(self, title, directory, "All Files (*)", options=options)
         if dest_file:
@@ -217,7 +228,7 @@ class MainLogic(QMainWindow):
                 self.result_dict = {"questions": self.quest_dict[i]}
                 self.round_dict["rounds"][i].update(self.result_dict)
         x["game"].update(self.round_dict)
-        file_path_credentials = os.path.join(os.path.dirname("ScorodumCreator"), "scenarion.json")
+        file_path_credentials = os.path.join(os.path.dirname("ScorodumCreator"), "scenario.json")
         with open(file_path_credentials, "w", encoding='utf8') as f:
             json.dump(x, f, indent=4, ensure_ascii=False)
 

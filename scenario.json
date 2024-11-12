@@ -29,67 +29,11 @@
                 "questions": [
                     {
                         "type": "select",
-                        "question": "123",
+                        "question": "test",
                         "answers": [
                             "",
                             "",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                "type": "classical",
-                "settings": {
-                    "is_test": false,
-                    "name": "round_name",
-                    "display_name": false,
-                    "time_to_answer": 50,
-                    "use_special_tactics": true
-                }
-            },
-            {
-                "type": "classical",
-                "settings": {
-                    "is_test": false,
-                    "name": "round_name",
-                    "display_name": false,
-                    "time_to_answer": 50,
-                    "use_special_tactics": true
-                }
-            },
-            {
-                "type": "classical",
-                "settings": {
-                    "is_test": false,
-                    "name": "round_name",
-                    "display_name": false,
-                    "time_to_answer": 50,
-                    "use_special_tactics": true
-                },
-                "questions": [
-                    {
-                        "type": "select",
-                        "question": "еуые",
-                        "answers": [
-                            "",
-                            "",
-                            "е",
+                            "t",
                             ""
                         ],
                         "correct_answer": "",

@@ -4,7 +4,7 @@
             "name": "test",
             "theme": "test",
             "client": "test",
-            "date": "02.10.2024"
+            "date": "12.11.2024"
         },
         "game_settings": {
             "tactics": {
@@ -29,15 +29,15 @@
                 "questions": [
                     {
                         "type": "select",
-                        "question": "t123",
+                        "question": "test",
                         "answers": [
                             "",
                             "",
-                            "",
+                            "t",
                             ""
                         ],
                         "correct_answer": "",
-                        "time_to_answer": 20,
+                        "time_to_answer": 50,
                         "media_data": {
                             "show_image": false,
                             "video": {
