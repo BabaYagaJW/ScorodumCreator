@@ -31,9 +31,9 @@
                         "type": "select",
                         "question": "123",
                         "answers": [
+                            "23",
+                            "123",
                             "",
-                            "",
-                            "1",
                             ""
                         ],
                         "correct_answer": "",

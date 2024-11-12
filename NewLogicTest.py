@@ -97,8 +97,8 @@ class MainLogic(QMainWindow):
             else:
                 try:
                     if i['type'] == 'classical':
-                        self.ui.All_Round.insertItem(self.ui.All_Round.count(),
-                                                     "Раунд " + str(self.ui.All_Round.count() + 1))
+                            self.ui.All_Round.insertItem(self.ui.All_Round.count(),
+                                                         "Раунд " + str(self.ui.All_Round.count() + 1))
                     else:
                         self.ui.All_Round.insertItem(self.ui.All_Round.count(),
                                                      "Блитц раунд")
@@ -171,25 +171,6 @@ class MainLogic(QMainWindow):
                 QMessageBox.information(self, "Успех", f"Файл успешно сохранен в: {dest_file}")
             except Exception as e:
                 QMessageBox.critical(self, "Ошибка", f"Не удалось сохранить файл: {e}")
-
-    def reload_all_round(self):
-        self.ui.All_Round.clear()
-        for i in self.list_round:
-            x = i['settings']
-            if x['is_test'] != False:
-                self.ui.All_Round.insertItem(0, 'Тестовый раунд')
-            else:
-                try:
-                    if i['type'] == 'classical':
-                        self.ui.All_Round.insertItem(self.ui.All_Round.count(),
-                                                     "Раунд " + str(self.ui.All_Round.count() + 1))
-                    else:
-                        self.ui.All_Round.insertItem(self.ui.All_Round.count(),
-                                                     "Блитц раунд")
-                finally:
-                    pass
-
-
 
         # Сохранение настроек раунда в JSON
     def save_round_settings(self):
