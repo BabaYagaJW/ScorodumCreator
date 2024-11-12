@@ -121,3 +121,31 @@ def on_quest_text(self):
                     self.ui_quest.Del_Quest.setVisible(False)
                     self.ui_quest.Save_Question.setVisible(True)
 
+#def del_round(self, count_del_round):
+           # self.quest_dict.pop(count_del_round)
+           # for i in list(self.quest_dict):
+           #     print(i)
+            #    if i > count_del_round:
+             #       self.del_quest_dict[i - 1] = self.quest_dict[i]
+             #   else:
+             #       self.del_quest_dict[i] = self.quest_dict[i]
+
+          #  self.quest_dict = dict(self.del_quest_dict)
+          #  print(self.quest_dict)
+
+    def reload_all_round(self):
+        self.ui.All_Round.clear()
+        for i in self.list_round:
+            x = i['settings']
+            if x['is_test'] != False:
+                self.ui.All_Round.insertItem(0, 'Тестовый раунд')
+            else:
+                try:
+                    if i['type'] == 'classical':
+                        self.ui.All_Round.insertItem(self.ui.All_Round.count(),
+                                                     "Раунд " + str(self.ui.All_Round.count() + 1))
+                    else:
+                        self.ui.All_Round.insertItem(self.ui.All_Round.count(),
+                                                     "Блитц раунд")
+                finally:
+                    pass

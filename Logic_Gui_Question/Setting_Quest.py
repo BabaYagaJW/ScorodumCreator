@@ -6,7 +6,7 @@ from Gui_Form.test_form import Ui_Test_Form
 
 
 class SettingQuest():
-    def __init__(self, type_question):
+    def __init__(self, type_question, count_item_round):
         super().__init__()
 
         self.window_quest = QtWidgets.QMainWindow()
@@ -19,7 +19,17 @@ class SettingQuest():
         self.ui_question.Two_Correct.clicked.connect(self.on_two_correct)
         self.ui_question.Three_Correct.clicked.connect(self.on_three_correct)
         self.ui_question.Fourth_Correct.clicked.connect(self.on_fourth_correct)
-        #self.ui_question.Save_Question.clicked.connect(self.on_save_question)
+        self.ui_question.Save_Question.clicked.connect(self.on_save_question)
+
+        self.Type_Quest = ""
+        self.quest_text = ""
+        self.First_Choise = ""
+        self.Two_Choise = ""
+        self.Third_Choise = ""
+        self.Fourth_Choise = ""
+        self.correct_answer = ""
+        self.xxx = type_question
+        self.type_question = count_item_round
 
         if  type_question == "Свободный ответ":
             self.ui_question.label_26.setVisible(False)
@@ -37,7 +47,7 @@ class SettingQuest():
             self.ui_question.Save_Question.setGeometry(220,160,75, 24)
 
     def show_new_window(self, type_question):
-        self.window_quest = SettingQuest(type_question)
+        self.window_quest = SettingQuest(self, type_question)
 
     # Нажатие на кнопку с отметкой о правильном ответе
 
@@ -81,6 +91,27 @@ class SettingQuest():
             self.ui_question.Three_Correct.setEnabled(True)
             self.ui_question.One_Correct.setEnabled(True)
 
+    def on_save_question(self):
+        if self.type_question == "С выбором ответа":
+            if self.ui_question.One_Correct.isChecked():
+                self.correct_answer = self.ui_question.First_Choise.text()
+            elif self.ui_question.Two_Correct.isChecked():
+                self.correct_answer = self.ui_question.Two_Choise.text()
+            elif self.ui_question.Three_Correct.isChecked():
+                self.correct_answer = self.ui_question.Third_Choise.text()
+            else:
+                self.correct_answer = self.ui_question.Fourth_Choise.text()
+            self.quest_text = self.ui_question.quest_text.text()
+            self.First_Choise = self.ui_question.First_Choise.text()
+            self.Two_Choise = self.ui_question.Two_Choise.text()
+            self.Third_Choise = self.ui_question.Third_Choise.text()
+            self.Fourth_Choise = self.ui_question.Fourth_Choise.text()
+        else:
+            self.quest_text = self.ui_question.quest_text.text()
+            self.First_Choise = self.ui_question.First_Choise.text()
+            self.correct_answer = self.ui_question.First_Choise.text()
 
+        print('Сохранение успешно')
+        self.window_quest.close()
     def closeEvent(self, event):
-        print("Закрытие окна с настройками вопросов")
+        print("Закрыто")

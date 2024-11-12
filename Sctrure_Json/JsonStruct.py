@@ -3,7 +3,8 @@ from Gui_Form.ui_question_round import Ui_Ques_Round
 
 
 class JsonStruct():
-    def structure_round_settings(self, Type_Round, Test_Round, Second_Round):
+    @staticmethod
+    def structure_round_settings(Type_Round, Test_Round, Second_Round):
         structure_settings_round = {
             "type": Type_Round,
             "settings": {
@@ -17,7 +18,8 @@ class JsonStruct():
 
         return structure_settings_round
 
-    def structure_blitz_round(self, Type_Round, Test_Round, Second_Round, Blitz_Score):
+    @staticmethod
+    def structure_blitz_round(Type_Round, Test_Round, Second_Round, Blitz_Score):
         structure_blitz_round = {
             "type": Type_Round,
             "settings": {
@@ -31,7 +33,8 @@ class JsonStruct():
 
         return structure_blitz_round
 
-    def structure_main_settings(self, Name_Game, Theme_Game, Client_Game, Date_Game, remove_answer, one_for_all,
+    @staticmethod
+    def structure_main_settings(Name_Game, Theme_Game, Client_Game, Date_Game, remove_answer, one_for_all,
                                 question_bet, all_in, team_bet, Mail_OnClick):
         structure_main = {
             "game": {
@@ -56,22 +59,25 @@ class JsonStruct():
 
         return structure_main
 
-    def structure_round(self):
+    @staticmethod
+    def structure_round():
         structure_answer = {
             "rounds": []
         }
 
         return structure_answer
 
-    def structure_question(self):
+    @staticmethod
+    def structure_question():
         structure_question = {
             "questions": []
         }
 
         return structure_question
 
-    def structure_question_settings(self, Type_Quest, quest_text, First_Choise, Two_Choise, Third_Choise, Fourth_Choise,
-                                    correct_answer):
+    @staticmethod
+    def structure_question_settings(Type_Quest, quest_text, First_Choise, Two_Choise, Third_Choise, Fourth_Choise,
+                                    correct_answer, Second_Round):
         structure_quest_settings = {
             "type": Type_Quest,
             "question": quest_text,
@@ -82,7 +88,7 @@ class JsonStruct():
                 Fourth_Choise
             ],
             "correct_answer": correct_answer,
-            "time_to_answer": 20,
+            "time_to_answer": Second_Round,
             "media_data": {
                 "show_image": False,
                 "video": {
@@ -99,7 +105,8 @@ class JsonStruct():
 
         return structure_quest_settings
 
-    def structure_blitz_question(self, number, quest_text, First_Choise):
+    @staticmethod
+    def structure_blitz_question(number, quest_text, First_Choise):
         structure_blitz_question = {
             "id": number,
             "type": "text",
@@ -108,15 +115,3 @@ class JsonStruct():
         }
 
         return structure_blitz_question
-
-    def test(self):
-        print(self.structure_round_settings("test", "test", "test"))
-        print(self.structure_main_settings("test", "test", "test", "test", "test", "test", "test", "test", "test2",
-                                           "test"))
-        print(self.structure_question_settings("test", "test", "test", "test", "test", "test"))
-        print(self.structure_round())
-        print(self.structure_question())
-
-
-if __name__ == "__main__":
-    JsonStruct().test()

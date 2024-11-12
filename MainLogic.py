@@ -46,8 +46,7 @@ class MainLog(QMainWindow):
 
     # Переключение между вкладками
     def tabChanged(self):
-        x = JsonStruct.structure_main_settings(self,
-                                               self.ui.Name_Game.text(),
+        x = JsonStruct.structure_main_settings(self.ui.Name_Game.text(),
                                                self.ui.Theme_Game.text(),
                                                self.ui.Client_Game.text(),
                                                self.ui.Date_Game.text(),
@@ -92,8 +91,7 @@ class MainLog(QMainWindow):
 
         # Кнопка удаления раунда и удаление его из JSON
     def on_del_round(self):
-        z = JsonStruct.structure_round_settings(self,
-                                                self.ui.Type_Round.currentText(),
+        z = JsonStruct.structure_round_settings(self.ui.Type_Round.currentText(),
                                                 self.ui.Test_Round.isChecked(),
                                                 self.ui.Second_Round.value())
         list_items = self.ui.All_Round.selectedItems()
@@ -343,8 +341,7 @@ class MainLog(QMainWindow):
 
     # Сохранение настроек раунда в JSON
     def save_round_settings(self):
-        z = JsonStruct.structure_round_settings(self,
-                                                self.ui.Type_Round.currentText(),
+        z = JsonStruct.structure_round_settings(self.ui.Type_Round.currentText(),
                                                 self.ui.Test_Round.isChecked(),
                                                 self.ui.Second_Round.value())
 
@@ -359,8 +356,7 @@ class MainLog(QMainWindow):
         count_items_queston = self.ui_quest.All_Question.currentRow()
 
         if self.ui.All_Round.currentItem().text() == "Блитц Раунд":
-            z = JsonStruct.structure_blitz_round(self,
-                                                 self.ui_quest.quest_text.text(),
+            z = JsonStruct.structure_blitz_round(self.ui_quest.quest_text.text(),
                                                  self.ui_quest.First_Choise.text())
 
             self.list_quest.append(z)
@@ -379,8 +375,7 @@ class MainLog(QMainWindow):
             else:
                 self.correct_answer = self.ui_quest.Fourth_Choise.text()
 
-            z = JsonStruct.structure_question_settings(self,
-                                                       self.ui_quest.Type_Quest.currentText(),
+            z = JsonStruct.structure_question_settings(self.ui_quest.Type_Quest.currentText(),
                                                        self.ui_quest.quest_text.text(),
                                                        self.ui_quest.First_Choise.text(),
                                                        self.ui_quest.Two_Choise.text(),

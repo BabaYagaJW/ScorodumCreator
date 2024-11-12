@@ -64,7 +64,7 @@
  [],
  False,
  False,
- 1729903996,
+ 1731255478,
  [('run.exe',
    'C:\\Users\\andre\\PycharmProjects\\ScorodumCreator\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')],

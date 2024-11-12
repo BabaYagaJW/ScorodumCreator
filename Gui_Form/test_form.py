@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QLabel,
+    QLineEdit, QPushButton, QSizePolicy, QWidget)
 
 class Ui_Test_Form(object):
     def setupUi(self, Test_Form):
@@ -75,6 +75,14 @@ class Ui_Test_Form(object):
         self.Save_Question = QPushButton(Test_Form)
         self.Save_Question.setObjectName(u"Save_Question")
         self.Save_Question.setGeometry(QRect(210, 270, 75, 24))
+        self.edit_type_quest = QComboBox(Test_Form)
+        self.edit_type_quest.addItem("")
+        self.edit_type_quest.addItem("")
+        self.edit_type_quest.setObjectName(u"edit_type_quest")
+        self.edit_type_quest.setGeometry(QRect(251, 30, 70, 28))
+        self.edit_label = QLabel(Test_Form)
+        self.edit_label.setObjectName(u"edit_label")
+        self.edit_label.setGeometry(QRect(170, 30, 71, 28))
 
         self.retranslateUi(Test_Form)
 
@@ -95,5 +103,9 @@ class Ui_Test_Form(object):
         self.One_Correct.setText("")
         self.Three_Correct.setText("")
         self.Save_Question.setText(QCoreApplication.translate("Test_Form", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
+        self.edit_type_quest.setItemText(0, QCoreApplication.translate("Test_Form", u"select", None))
+        self.edit_type_quest.setItemText(1, QCoreApplication.translate("Test_Form", u"text", None))
+
+        self.edit_label.setText(QCoreApplication.translate("Test_Form", u"\u0422\u0438\u043f \u0432\u043e\u043f\u0440\u043e\u0441\u0430", None))
     # retranslateUi
 
