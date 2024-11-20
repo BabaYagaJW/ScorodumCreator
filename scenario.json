@@ -4,7 +4,7 @@
             "name": "test",
             "theme": "test",
             "client": "test",
-            "date": "12.11.2024"
+            "date": "19.11.2024"
         },
         "game_settings": {
             "tactics": {
@@ -25,7 +25,33 @@
                     "display_name": false,
                     "time_to_answer": 50,
                     "use_special_tactics": true
-                }
+                },
+                "questions": [
+                    {
+                        "type": "select",
+                        "question": "tset",
+                        "answers": [
+                            "",
+                            "",
+                            "t",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    }
+                ]
             }
         ]
     }

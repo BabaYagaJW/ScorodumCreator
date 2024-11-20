@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Test_Form</class>
- <widget class="QWidget" name="Test_Form">
+ <class>form_question</class>
+ <widget class="QWidget" name="form_question">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Вопрос</string>
   </property>
   <widget class="QLabel" name="label_23">
    <property name="geometry">
@@ -222,12 +225,12 @@
     <string>Сохранить</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="edit_type_quest">
+  <widget class="QComboBox" name="type_question">
    <property name="geometry">
     <rect>
-     <x>251</x>
-     <y>30</y>
-     <width>70</width>
+     <x>250</x>
+     <y>0</y>
+     <width>81</width>
      <height>28</height>
     </rect>
    </property>
@@ -242,12 +245,12 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="edit_label">
+  <widget class="QLabel" name="type_label">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>30</y>
-     <width>71</width>
+     <x>169</x>
+     <y>0</y>
+     <width>81</width>
      <height>28</height>
     </rect>
    </property>

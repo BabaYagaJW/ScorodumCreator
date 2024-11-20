@@ -1,5 +1,5 @@
 from Gui_Form.ui_main import Ui_MainWindow
-from Gui_Form.ui_question_round import Ui_Ques_Round
+from Gui_Form.form_round import Ui_form_round
 
 
 class JsonStruct():

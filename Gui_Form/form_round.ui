@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>form_round</class>
+ <widget class="QDialog" name="form_round">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Раунд</string>
   </property>
   <widget class="QListWidget" name="All_Question">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>160</y>
+     <x>30</x>
+     <y>170</y>
      <width>241</width>
      <height>341</height>
     </rect>
@@ -32,67 +32,72 @@
   <widget class="QPushButton" name="Del_Quest">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>510</y>
-     <width>75</width>
+     <x>160</x>
+     <y>520</y>
+     <width>111</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Удалить</string>
+    <string>Удалить вопрос</string>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="autoExclusive">
+    <bool>false</bool>
+   </property>
+   <property name="autoRepeatDelay">
+    <number>388</number>
+   </property>
+   <property name="autoRepeatInterval">
+    <number>31</number>
    </property>
   </widget>
   <widget class="QPushButton" name="Add_Quest">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>510</y>
-     <width>75</width>
+     <x>30</x>
+     <y>520</y>
+     <width>121</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Добавить</string>
+    <string>Добавить вопрос</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_22">
+  <widget class="QLabel" name="Blitz_label">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>30</y>
-     <width>71</width>
+     <y>130</y>
+     <width>81</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>Тип вопроса</string>
+    <string>Очки блиц</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="Type_Quest">
+  <widget class="QCheckBox" name="Test_Round">
    <property name="geometry">
     <rect>
-     <x>151</x>
-     <y>30</y>
-     <width>70</width>
+     <x>180</x>
+     <y>50</y>
+     <width>21</width>
      <height>28</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>select</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>text</string>
-    </property>
-   </item>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
   <widget class="QSpinBox" name="Second_Round">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>80</y>
+     <x>160</x>
+     <y>90</y>
      <width>71</width>
      <height>22</height>
     </rect>
@@ -134,11 +139,24 @@
     <number>50</number>
    </property>
   </widget>
+  <widget class="QLabel" name="label_23">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>91</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Тестовый раунд</string>
+   </property>
+  </widget>
   <widget class="QLabel" name="label_24">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>80</y>
+     <x>70</x>
+     <y>90</y>
      <width>81</width>
      <height>28</height>
     </rect>
@@ -147,11 +165,11 @@
     <string>Время раунда</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="Blitz_Score_2">
+  <widget class="QSpinBox" name="Blitz_Score">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>120</y>
+     <x>160</x>
+     <y>130</y>
      <width>71</width>
      <height>22</height>
     </rect>
@@ -193,17 +211,37 @@
     <number>50</number>
    </property>
   </widget>
-  <widget class="QLabel" name="Blitz_label_2">
+  <widget class="QComboBox" name="Type_Round">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>120</y>
-     <width>81</width>
+     <x>160</x>
+     <y>10</y>
+     <width>91</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>classical</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>blitz</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_22">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>10</y>
+     <width>70</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>Очки блиц</string>
+    <string>Тип раунда</string>
    </property>
   </widget>
  </widget>
