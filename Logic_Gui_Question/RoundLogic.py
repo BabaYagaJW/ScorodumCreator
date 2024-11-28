@@ -8,13 +8,15 @@ from NewLogicTest import MainLogic
 from Sctrure_Json.JsonStruct import JsonStruct
 
 
-class RoundLogic():
-        def __init__(self, list_round, link, quest_dict, count_item_round, count_double_round, round_dict, save_main_settings, method_on_click):
+class RoundLogic:
+        def __init__(self, list_round, link, quest_dict, count_item_round, count_double_round, round_dict, save_main_settings, method_on_click, text_round):
             """
 
             :type self: object
             """
+
             self.link_main = link
+            self.round_link = self
             self.window = QtWidgets.QMainWindow()
             self.round_gui = Ui_form_round()
             self.round_gui.setupUi(self.window)
@@ -33,26 +35,42 @@ class RoundLogic():
             self.result_dict = {}
             self.list_round = list_round
             self.quest_dict = quest_dict
-            self.count_item_round = count_item_round
             self.list_quest = []
+            self.count_item_round = count_item_round
             self.round_dict = round_dict
             self.save_main_settings = save_main_settings
             self.count_double_round = count_double_round
             self.method_on_click = method_on_click
 
             if method_on_click == 'doubleclick':
-                self.show_question()
+                self.all_vision_question(self.round_link, None)
+                if text_round == "Блитц раунд":
+                    self.round_gui.Type_Round.setItemText(0, "blitz")
+                    self.round_gui.Type_Round.setItemText(1, "classical")
+                    self.round_gui.Test_Round.setChecked(False)
+                elif text_round == "Тестовый раунд":
+                    self.round_gui.Type_Round.setItemText(0, "classical")
+                    self.round_gui.Type_Round.setItemText(1, "blitz")
+                    self.round_gui.Test_Round.setChecked(True)
+                else:
+                    self.round_gui.Type_Round.setItemText(0, "classical")
+                    self.round_gui.Type_Round.setItemText(1, "blitz")
+                    self.round_gui.Test_Round.setChecked(False)
+
+
+
 
         def on_add_quest(self):
-            new_window = QuestionLogic(self.quest_dict,
-                                       self,
-                                       self.round_gui.Type_Round.currentText(),
-                                       self.count_item_round,
-                                       self.round_gui.All_Question.count(),
-                                       self.list_quest,
-                                       self.round_gui.Second_Round.value(),
-                                       "addquestion",
-                                       self.round_gui.All_Question.currentRow())
+            window_quest = QuestionLogic(self.quest_dict,
+                                       self.round_link,
+                                        self.round_gui.Type_Round.currentText(),
+                                        self.count_item_round,
+                                        self.count_double_round,
+                                        self.round_gui.All_Question.count(),
+                                        self.list_quest,
+                                        self.round_gui.Second_Round.value(),
+                                        self.round_gui.All_Question.currentRow(),
+                                        "addquestion")
 
 
         def show_question(self):
@@ -65,26 +83,30 @@ class RoundLogic():
                     else:
                         self.round_gui.All_Question.insertItem(self.round_gui.All_Question.count(),
                                                                  "Свободный ответ")
-                self.list_quest = self.quest_dict.get(self.count_item_round)
+
 
         def on_double_click_quest(self):
-            new_window = QuestionLogic(self.quest_dict,
-                                       self,
+            window_quest = QuestionLogic(self.quest_dict,
+                                       self.round_link,
                                        self.round_gui.Type_Round.currentText(),
                                        self.count_item_round,
+                                       self.count_double_round,
                                        self.round_gui.All_Question.count(),
                                        self.list_quest,
                                        self.round_gui.Second_Round.value(),
-                                       "doubleclick",
-                                       self.round_gui.All_Question.currentRow())
+                                       self.round_gui.All_Question.currentRow(),
+                                       "doubleclick")
+
         def on_type_round(self):
             if self.round_gui.Type_Round.currentText() == "classical":
                 self.round_gui.Blitz_label.setEnabled(False)
                 self.round_gui.Blitz_Score.setEnabled(False)
+                self.round_gui.Test_Round.setEnabled(True)
                 self.round_gui.Second_Round.setValue(50)
             else:
                 self.round_gui.Blitz_label.setEnabled(True)
                 self.round_gui.Second_Round.setValue(180)
+                self.round_gui.Test_Round.setEnabled(False)
                 self.round_gui.Blitz_Score.setEnabled(True)
 
         def on_del_quest(self):
@@ -105,6 +127,14 @@ class RoundLogic():
             else:
                 self.list_round.append(z)
 
+        def save_double_settings(self):
+            x = self.list_round[self.count_double_round]
+            y = x["settings"]
+            if x.get("type") != self.round_gui.Type_Round.currentText():
+                x["type"] = self.round_gui.Type_Round.currentText()
+            elif y.get("is_test") != self.round_gui.Test_Round.isChecked():
+                y["is_test"] = self.round_gui.Test_Round.isChecked()
+
         def on_del_question(self):
             list_items = self.round_gui.All_Question.selectedItems()
             count_question = self.round_gui.All_Question.currentRow()
@@ -114,8 +144,9 @@ class RoundLogic():
                 del (self.round_gui[self.count_item_round][count_question])
             print("Вопрос удален")
 
-        def all_vision_question(self, link_round):
-            link_round.round_gui.All_Question.clear()
+        def all_vision_question(self, link_round, test):
+            print(link_round)
+            print(test)
             if link_round.quest_dict.get(link_round.count_item_round):
                 for i in link_round.quest_dict.get(link_round.count_item_round):
                     if i.get("type") == "select":
@@ -125,13 +156,15 @@ class RoundLogic():
                         link_round.round_gui.All_Question.insertItem(link_round.round_gui.All_Question.count(),
                                                                  "Свободный ответ")
                 link_round.list_quest = link_round.quest_dict.get(link_round.count_item_round)
-
+            print("--------------")
             print(self.quest_dict)
 
         def closeEvent(self, event):
             self.list_quest = []
             if self.method_on_click == 'addclick':
                 self.save_round_settings()
+            else:
+                self.save_double_settings()
             from __main__ import mainFormLogic
             mainFormLogic().reload_all_round(self.link_main)
             mainFormLogic.show(self.link_main)
@@ -150,5 +183,6 @@ class RoundLogic():
             file_path_credentials = os.path.join(os.path.dirname("ScorodumCreator"), "scenario.json")
             with open(file_path_credentials, "w", encoding='utf8') as f:
                 json.dump(self.save_main_settings, f, indent=4, ensure_ascii=False)
+
             
 

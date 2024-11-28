@@ -4,7 +4,7 @@
             "name": "test",
             "theme": "test",
             "client": "test",
-            "date": "19.11.2024"
+            "date": "25.11.2024"
         },
         "game_settings": {
             "tactics": {
@@ -29,11 +29,11 @@
                 "questions": [
                     {
                         "type": "select",
-                        "question": "tset",
+                        "question": "123",
                         "answers": [
                             "",
                             "",
-                            "t",
+                            "",
                             ""
                         ],
                         "correct_answer": "",

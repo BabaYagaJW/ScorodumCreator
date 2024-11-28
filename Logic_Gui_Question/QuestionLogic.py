@@ -4,6 +4,7 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow
 
 from Gui_Form.form_question import Ui_form_question
+from Logic_Gui_Question.RoundLogic import RoundLogic
 from Sctrure_Json.JsonStruct import JsonStruct
 
 
@@ -11,10 +12,9 @@ from Sctrure_Json.JsonStruct import JsonStruct
 
 
 
-class QuestionLogic():
-    def __init__(self, quest_dict, link, type_round, count_item_round, count_question, list_quest, second_round, text_click, currentRowQuest):
+class QuestionLogic:
+    def __init__(self, quest_dict, link, type_round, count_item_round, count_double_round, count_question, list_quest, second_round, currentRowQuest, text_click):
         super().__init__()
-
         self.window_quest = QtWidgets.QMainWindow()
         self.question_gui = Ui_form_question()
         self.question_gui.setupUi(self.window_quest)
@@ -40,67 +40,107 @@ class QuestionLogic():
         self.quest_dict = quest_dict
         self.type_round = type_round
         self.count_item_round = count_item_round
+        self.count_double_round = count_double_round
         self.count_question = count_question
         self.list_quest = list_quest
         self.second_round = second_round
+        self.test_link = self
         self.link_round = link
         self.currentRowQuest = currentRowQuest
 
+        if self.type_round == "blitz":
+            self.question_gui.label_26.setEnabled(False)
+            self.question_gui.label_27.setEnabled(False)
+            self.question_gui.label_28.setEnabled(False)
+            self.question_gui.Two_Choise.setEnabled(False)
+            self.question_gui.Third_Choise.clear()
+            self.question_gui.Fourth_Choise.setEnabled(False)
+            self.question_gui.Fourth_Choise.clear()
+            self.question_gui.Third_Choise.setEnabled(False)
+            self.question_gui.Third_Choise.clear()
+            self.question_gui.Two_Correct.setEnabled(False)
+            self.question_gui.Two_Correct.setChecked(False)
+            self.question_gui.Fourth_Correct.setChecked(False)
+            self.question_gui.Three_Correct.setChecked(False)
+            self.question_gui.Three_Correct.setEnabled(False)
+            self.question_gui.Fourth_Correct.setEnabled(False)
+            self.question_gui.One_Correct.setChecked(True)
+            self.question_gui.type_question.setItemText(0, "text")
+            self.question_gui.type_question.setEnabled(False)
+        else:
+            self.question_gui.label_26.setEnabled(True)
+            self.question_gui.label_27.setEnabled(True)
+            self.question_gui.label_28.setEnabled(True)
+            self.question_gui.Two_Choise.setEnabled(True)
+            self.question_gui.Fourth_Choise.setEnabled(True)
+            self.question_gui.Third_Choise.setEnabled(True)
+            self.question_gui.Two_Correct.setEnabled(True)
+            self.question_gui.Fourth_Correct.setEnabled(True)
+            self.question_gui.Three_Correct.setEnabled(True)
+            self.question_gui.One_Correct.setChecked(False)
+            self.question_gui.One_Correct.setEnabled(True)
+            self.question_gui.type_question.setItemText(0, "select")
+            self.question_gui.type_question.setItemText(1, "text")
+            self.question_gui.type_question.setEnabled(True)
+
         if text_click == "doubleclick":
+            if self.currentRowQuest == -1:
+                self.currentRowQuest = 0
+            if self.count_double_round == -1:
+                self.count_double_round = 0
+
             try:
-                x = self.quest_dict[self.count_item_round][self.currentRowQuest]
+                x = self.quest_dict[self.count_double_round][self.currentRowQuest]
             except KeyError:
                 pass
             except IndexError:
                 pass
             else:
-                 if self.type_round == "Блитц раунд":
-                     self.question_gui.quest_text.setText(x.get("question"))
-                     self.question_gui.First_Choise.setText(x.get("correct_answer"))
-                     self.question_gui.One_Correct.setChecked(True)
-                     self.question_gui.One_Correct.setEnabled(False)
-                 else:
+                if self.type_round == "Блитц раунд":
+                    self.question_gui.quest_text.setText(x.get("question"))
+                    self.question_gui.First_Choise.setText(x.get("correct_answer"))
+                    self.question_gui.One_Correct.setChecked(True)
+                    self.question_gui.One_Correct.setEnabled(False)
+                else:
+                    y = x.get("answers")
+                    if (x.get("type") == "select"):
+                        self.question_gui.type_question.setItemText(0, x.get("type"))
+                        self.question_gui.type_question.setItemText(1, "text")
+                    else:
+                        self.question_gui.type_question.setItemText(0, x.get("type"))
+                        self.question_gui.type_question.setItemText(1, "select")
 
-                     y = x.get("answers")
+                    self.question_gui.quest_text.setText(x.get("question"))
+                    self.question_gui.First_Choise.setText(y[0])
+                    self.question_gui.Two_Choise.setText(y[1])
+                    self.question_gui.Third_Choise.setText(y[2])
+                    self.question_gui.Fourth_Choise.setText(y[3])
 
-                     if (x.get("type") == "select"):
-                         self.question_gui.type_question.setItemText(0, x.get("type"))
-                         self.question_gui.type_question.setItemText(1, "text")
-                     else:
-                         self.question_gui.type_question.setItemText(0, x.get("type"))
-                         self.question_gui.type_question.setItemText(1, "select")
-
-                     self.question_gui.quest_text.setText(x.get("question"))
-                     self.question_gui.First_Choise.setText(y[0])
-                     self.question_gui.Two_Choise.setText(y[1])
-                     self.question_gui.Third_Choise.setText(y[2])
-                     self.question_gui.Fourth_Choise.setText(y[3])
-
-                     if x.get("correct_answer") == y[0]:
-                         self.question_gui.One_Correct.setChecked(True)
-                         self.question_gui.Two_Correct.setEnabled(False)
-                         self.question_gui.Three_Correct.setEnabled(False)
-                         self.question_gui.Fourth_Correct.setEnabled(False)
-                     elif x.get("correct_answer") == y[1]:
-                         self.question_gui.Two_Correct.setChecked(True)
-                         self.question_gui.One_Correct.setEnabled(False)
-                         self.question_gui.Three_Correct.setEnabled(False)
-                         self.question_gui.Fourth_Correct.setEnabled(False)
-                     elif x.get("correct_answer") == y[2]:
-                         self.question_gui.Three_Correct.setChecked(True)
-                         self.question_gui.Two_Correct.setEnabled(False)
-                         self.question_gui.One_Correct.setEnabled(False)
-                         self.question_gui.Fourth_Correct.setEnabled(False)
-                     else:
-                         self.question_gui.Fourth_Correct.setChecked(True)
-                         self.question_gui.Two_Correct.setEnabled(False)
-                         self.question_gui.Three_Correct.setEnabled(False)
-                         self.question_gui.One_Correct.setEnabled(False)
+                    if x.get("correct_answer") == y[0]:
+                        self.question_gui.One_Correct.setChecked(True)
+                        self.question_gui.Two_Correct.setEnabled(False)
+                        self.question_gui.Three_Correct.setEnabled(False)
+                        self.question_gui.Fourth_Correct.setEnabled(False)
+                    elif x.get("correct_answer") == y[1]:
+                        self.question_gui.Two_Correct.setChecked(True)
+                        self.question_gui.One_Correct.setEnabled(False)
+                        self.question_gui.Three_Correct.setEnabled(False)
+                        self.question_gui.Fourth_Correct.setEnabled(False)
+                    elif x.get("correct_answer") == y[2]:
+                        self.question_gui.Three_Correct.setChecked(True)
+                        self.question_gui.Two_Correct.setEnabled(False)
+                        self.question_gui.One_Correct.setEnabled(False)
+                        self.question_gui.Fourth_Correct.setEnabled(False)
+                    else:
+                        self.question_gui.Fourth_Correct.setChecked(True)
+                        self.question_gui.Two_Correct.setEnabled(False)
+                        self.question_gui.Three_Correct.setEnabled(False)
+                        self.question_gui.One_Correct.setEnabled(False)
 
 
     def on_save_question(self):
         try:
-            x = self.quest_dict[self.count_item_round][self.count_question]
+            x = self.quest_dict[self.count_double_round][self.currentRowQuest]
         except KeyError:
             if self.type_round == "Блитц раунд":
                 z = JsonStruct.structure_blitz_question(self.blitz_counter,
@@ -202,7 +242,7 @@ class QuestionLogic():
                     x["correct_answer"] = self.question_gui.Fourth_Choise.text()
 
         self.window_quest.close()
-        self.link_round.all_vision_question(self.link_round)
+        self.link_round.all_vision_question(self.link_round, self.test_link)
 
     def on_type_question(self):
         if self.question_gui.type_question.currentText() == "text":
@@ -210,9 +250,15 @@ class QuestionLogic():
             self.question_gui.label_27.setEnabled(False)
             self.question_gui.label_28.setEnabled(False)
             self.question_gui.Two_Choise.setEnabled(False)
+            self.question_gui.Two_Choise.clear()
             self.question_gui.Fourth_Choise.setEnabled(False)
+            self.question_gui.Fourth_Choise.clear()
             self.question_gui.Third_Choise.setEnabled(False)
+            self.question_gui.Third_Choise.clear()
             self.question_gui.Two_Correct.setEnabled(False)
+            self.question_gui.Two_Correct.setChecked(False)
+            self.question_gui.Fourth_Correct.setChecked(False)
+            self.question_gui.Three_Correct.setChecked(False)
             self.question_gui.Three_Correct.setEnabled(False)
             self.question_gui.Fourth_Correct.setEnabled(False)
             self.question_gui.One_Correct.setChecked(True)
@@ -227,6 +273,7 @@ class QuestionLogic():
             self.question_gui.Fourth_Correct.setEnabled(True)
             self.question_gui.Three_Correct.setEnabled(True)
             self.question_gui.One_Correct.setChecked(False)
+            self.question_gui.One_Correct.setEnabled(True)
     # Нажатие на кнопку с отметкой о правильном ответе
     def on_one_correct(self):
         if self.question_gui.One_Correct.isChecked():
@@ -270,5 +317,3 @@ class QuestionLogic():
 
     def closeEvent(self, event):
         print("Закрыто")
-
-        self.list_quest = []
