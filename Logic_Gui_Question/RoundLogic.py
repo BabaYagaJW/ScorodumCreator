@@ -43,7 +43,7 @@ class RoundLogic:
             self.method_on_click = method_on_click
 
             if method_on_click == 'doubleclick':
-                self.all_vision_question(self.round_link, None)
+                self.all_vision_question()
                 if text_round == "Блитц раунд":
                     self.round_gui.Type_Round.setItemText(0, "blitz")
                     self.round_gui.Type_Round.setItemText(1, "classical")
@@ -56,9 +56,6 @@ class RoundLogic:
                     self.round_gui.Type_Round.setItemText(0, "classical")
                     self.round_gui.Type_Round.setItemText(1, "blitz")
                     self.round_gui.Test_Round.setChecked(False)
-
-
-
 
         def on_add_quest(self):
             window_quest = QuestionLogic(self.quest_dict,
@@ -144,18 +141,29 @@ class RoundLogic:
                 del (self.round_gui[self.count_item_round][count_question])
             print("Вопрос удален")
 
-        def all_vision_question(self, link_round, test):
-            print(link_round)
-            print(test)
-            if link_round.quest_dict.get(link_round.count_item_round):
-                for i in link_round.quest_dict.get(link_round.count_item_round):
-                    if i.get("type") == "select":
-                        link_round.round_gui.All_Question.insertItem(link_round.round_gui.All_Question.count(),
-                                                                 "С выбором ответа")
-                    else:
-                        link_round.round_gui.All_Question.insertItem(link_round.round_gui.All_Question.count(),
-                                                                 "Свободный ответ")
-                link_round.list_quest = link_round.quest_dict.get(link_round.count_item_round)
+        def all_vision_question(self):
+            print(self.count_item_round)
+            self.round_gui.All_Question.clear()
+            if self.method_on_click == 'addclick':
+                if self.quest_dict.get(self.count_item_round):
+                    for i in self.quest_dict.get(self.count_item_round):
+                        if i.get("type") == "select":
+                            self.round_gui.All_Question.insertItem(self.round_gui.All_Question.count(),
+                                                                     "С выбором ответа")
+                        else:
+                            self.round_gui.All_Question.insertItem(self.round_gui.All_Question.count(),
+                                                                     "Свободный ответ")
+            else:
+                if self.quest_dict.get(self.count_double_round):
+                    for i in self.quest_dict.get(self.count_double_round):
+                        if i.get("type") == "select":
+                            self.round_gui.All_Question.insertItem(self.round_gui.All_Question.count(),
+                                                                     "С выбором ответа")
+                        else:
+                            self.round_gui.All_Question.insertItem(self.round_gui.All_Question.count(),
+                                                                     "Свободный ответ")
+
+            self.list_quest = self.quest_dict.get(self.count_item_round)
             print("--------------")
             print(self.quest_dict)
 

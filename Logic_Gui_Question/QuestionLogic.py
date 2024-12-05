@@ -4,11 +4,7 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow
 
 from Gui_Form.form_question import Ui_form_question
-from Logic_Gui_Question.RoundLogic import RoundLogic
 from Sctrure_Json.JsonStruct import JsonStruct
-
-
-#from Gui_Form.test_form import Ui_Test_Form
 
 
 
@@ -140,7 +136,8 @@ class QuestionLogic:
 
     def on_save_question(self):
         try:
-            x = self.quest_dict[self.count_double_round][self.currentRowQuest]
+            x = self.quest_dict[self.count_double_round][self.count_question]
+            print(self.count_question)
         except KeyError:
             if self.type_round == "Блитц раунд":
                 z = JsonStruct.structure_blitz_question(self.blitz_counter,
@@ -242,7 +239,8 @@ class QuestionLogic:
                     x["correct_answer"] = self.question_gui.Fourth_Choise.text()
 
         self.window_quest.close()
-        self.link_round.all_vision_question(self.link_round, self.test_link)
+        from Logic_Gui_Question.RoundLogic import RoundLogic
+        RoundLogic.all_vision_question(self.link_round)
 
     def on_type_question(self):
         if self.question_gui.type_question.currentText() == "text":

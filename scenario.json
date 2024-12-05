@@ -4,7 +4,7 @@
             "name": "test",
             "theme": "test",
             "client": "test",
-            "date": "25.11.2024"
+            "date": "04.12.2024"
         },
         "game_settings": {
             "tactics": {
@@ -31,8 +31,8 @@
                         "type": "select",
                         "question": "123",
                         "answers": [
-                            "",
-                            "",
+                            "fdf",
+                            "123",
                             "",
                             ""
                         ],
