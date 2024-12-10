@@ -33,6 +33,7 @@ class RoundLogic:
             self.round_gui.All_Question.doubleClicked.connect(self.on_double_click_quest)
 
             self.result_dict = {}
+            self.del_quest_dict = {}
             self.list_round = list_round
             self.quest_dict = quest_dict
             self.list_quest = []
@@ -44,18 +45,25 @@ class RoundLogic:
 
             if method_on_click == 'doubleclick':
                 self.all_vision_question()
+                x = self.list_round[self.count_double_round]
+                y = x["settings"]
+
                 if text_round == "Блитц раунд":
                     self.round_gui.Type_Round.setItemText(0, "blitz")
                     self.round_gui.Type_Round.setItemText(1, "classical")
                     self.round_gui.Test_Round.setChecked(False)
+                    self.round_gui.Second_Round.setValue(y["time_to_answer"])
+                    self.round_gui.Blitz_Score.setValue(y["blitz_score"])
                 elif text_round == "Тестовый раунд":
                     self.round_gui.Type_Round.setItemText(0, "classical")
                     self.round_gui.Type_Round.setItemText(1, "blitz")
                     self.round_gui.Test_Round.setChecked(True)
+                    self.round_gui.Second_Round.setValue(y["time_to_answer"])
                 else:
                     self.round_gui.Type_Round.setItemText(0, "classical")
                     self.round_gui.Type_Round.setItemText(1, "blitz")
                     self.round_gui.Test_Round.setChecked(False)
+                    self.round_gui.Second_Round.setValue(y["time_to_answer"])
 
         def on_add_quest(self):
             window_quest = QuestionLogic(self.quest_dict,
@@ -131,6 +139,24 @@ class RoundLogic:
                 x["type"] = self.round_gui.Type_Round.currentText()
             elif y.get("is_test") != self.round_gui.Test_Round.isChecked():
                 y["is_test"] = self.round_gui.Test_Round.isChecked()
+            elif y.get("time_to_answer") != self.round_gui.Second_Round.value():
+                y["time_to_answer"] = self.round_gui.Second_Round.value()
+            elif y.get("blitz_score") != self.round_gui.Blitz_Score.value():
+                y["blitz_score"] = self.round_gui.Blitz_Score.value()
+
+        def del_round(self, count_del_round):
+            try:
+                self.quest_dict.pop(count_del_round)
+                for i in list(self.quest_dict):
+                    if i > count_del_round:
+                        self.del_quest_dict[i - 1] = self.quest_dict[i]
+                    else:
+                        self.del_quest_dict[i] = self.quest_dict[i]
+
+                self.quest_dict = dict(self.del_quest_dict)
+            except KeyError:
+                print("Раунд пустой")
+                pass
 
         def on_del_question(self):
             list_items = self.round_gui.All_Question.selectedItems()
@@ -142,7 +168,6 @@ class RoundLogic:
             print("Вопрос удален")
 
         def all_vision_question(self):
-            print(self.count_item_round)
             self.round_gui.All_Question.clear()
             if self.method_on_click == 'addclick':
                 if self.quest_dict.get(self.count_item_round):
@@ -164,8 +189,6 @@ class RoundLogic:
                                                                      "Свободный ответ")
 
             self.list_quest = self.quest_dict.get(self.count_item_round)
-            print("--------------")
-            print(self.quest_dict)
 
         def closeEvent(self, event):
             self.list_quest = []
@@ -178,7 +201,6 @@ class RoundLogic:
             mainFormLogic.show(self.link_main)
 
             for i in range(len(self.round_dict["rounds"])):
-                print(i)
                 if not i in self.quest_dict.keys():
                     print("нет ключа")
                     continue

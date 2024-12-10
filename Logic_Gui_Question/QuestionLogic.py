@@ -1,5 +1,3 @@
-from traceback import print_tb
-
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow
 
@@ -135,9 +133,11 @@ class QuestionLogic:
 
 
     def on_save_question(self):
+        print('on_save_question')
+        print(self.count_double_round)
+        print(self.count_question)
         try:
             x = self.quest_dict[self.count_double_round][self.count_question]
-            print(self.count_question)
         except KeyError:
             if self.type_round == "Блитц раунд":
                 z = JsonStruct.structure_blitz_question(self.blitz_counter,
@@ -158,8 +158,11 @@ class QuestionLogic:
                     self.correct_answer = self.question_gui.Two_Choise.text()
                 elif self.question_gui.Three_Correct.isChecked():
                     self.correct_answer = self.question_gui.Third_Choise.text()
-                else:
+                elif self.question_gui.Fourth_Correct.isChecked():
                     self.correct_answer = self.question_gui.Fourth_Choise.text()
+                else:
+                    self.coorrect_answer = self.question_gui.First_Choise.text()
+
 
                 z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
                                                                       self.question_gui.quest_text.text(),
@@ -169,6 +172,8 @@ class QuestionLogic:
                                                                       self.question_gui.Fourth_Choise.text(),
                                                                       self.correct_answer,
                                                                       self.second_round)
+
+                print(type(z))
 
                 self.list_quest.append(z)
 
@@ -208,6 +213,8 @@ class QuestionLogic:
                                                                       self.correct_answer,
                                                                       self.second_round)
 
+                print(type(z))
+
                 self.list_quest.append(z)
 
                 if not bool(self.quest_dict.get(self.count_item_round)):
@@ -223,7 +230,6 @@ class QuestionLogic:
                 y = x.get("answers")
 
                 x["type"] = self.question_gui.type_question.currentText()
-                print(x["type"])
                 x["question"] = self.question_gui.quest_text.text()
                 y[0] = self.question_gui.First_Choise.text()
                 y[1] = self.question_gui.Two_Choise.text()

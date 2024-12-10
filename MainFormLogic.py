@@ -21,6 +21,7 @@ class mainFormLogic(QMainWindow):
         self.list_round = []
         self.quest_dict = {}
         self.result_dict = {}
+        self.count_round = 0
         self.del_quest_dict = {}
         self.round_dict = {"rounds": self.list_round}
 
@@ -46,7 +47,6 @@ class mainFormLogic(QMainWindow):
                                                                      self.ui.team_bet.value(),
                                                                      self.ui.Mail_OnClick.isChecked())
 
-        print(self.list_round)
         self.hide()
         window_round = RoundLogic(self.list_round, self, self.quest_dict, self.ui.All_Round.count(), self.ui.All_Round.currentRow(), self.round_dict, self.Save_main_settings, "addclick", None)
 
@@ -54,7 +54,6 @@ class mainFormLogic(QMainWindow):
 
     def reload_all_round(self, link_main):
         link_main.ui.All_Round.insertItem(0, 'test')
-        print(link_main.list_round)
         link_main.ui.All_Round.clear()
         for i in link_main.list_round:
             x = i['settings']
@@ -76,11 +75,12 @@ class mainFormLogic(QMainWindow):
     def on_del_round(self):
         text_round_del = self.ui.All_Round.currentItem().text()
         from Logic_Gui_Question.QuestionLogic import QuestionLogic
+        self.count_round = self.ui.All_Round.currentRow()
         if not self.ui.All_Round.selectedItems(): return
         for item in self.ui.All_Round.selectedItems():
             self.ui.All_Round.takeItem(self.ui.All_Round.row(item))
             self.list_round.pop(self.ui.All_Round.currentRow())
-            #QuestionLogic.del_round(self, self.count_round)
+            RoundLogic.del_round(self, self.count_round)
             self.reload_all_round(self)
             print("Удалили раунд: " + text_round_del)
 
@@ -88,14 +88,12 @@ class mainFormLogic(QMainWindow):
             try:
                 self.quest_dict.pop(count_del_round)
                 for i in list(self.quest_dict):
-                    print(i)
                     if i > count_del_round:
                         self.del_quest_dict[i - 1] = self.quest_dict[i]
                     else:
                         self.del_quest_dict[i] = self.quest_dict[i]
 
                 self.quest_dict = dict(self.del_quest_dict)
-                print(self.quest_dict)
             except KeyError:
                 print("Раунд пустой")
                 pass
