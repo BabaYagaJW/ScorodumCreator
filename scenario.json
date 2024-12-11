@@ -20,72 +20,24 @@
             {
                 "type": "classical",
                 "settings": {
-                    "is_test": true,
+                    "is_test": false,
                     "name": "round_name",
                     "display_name": false,
-                    "time_to_answer": 123,
+                    "time_to_answer": 50,
                     "use_special_tactics": true,
                     "blitz_score": 50
                 },
                 "questions": [
                     {
                         "type": "select",
-                        "question": "123",
-                        "answers": [
-                            "123",
-                            "123",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "text",
-                        "question": "123",
+                        "question": "test",
                         "answers": [
                             "123",
                             "",
                             "",
-                            ""
+                            "23"
                         ],
-                        "correct_answer": "123",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "123",
-                        "answers": [
-                            "123",
-                            "123",
-                            "123",
-                            ""
-                        ],
-                        "correct_answer": "123",
+                        "correct_answer": "23",
                         "time_to_answer": 50,
                         "media_data": {
                             "show_image": false,
@@ -101,6 +53,16 @@
                         }
                     }
                 ]
+            },
+            {
+                "type": "classical",
+                "settings": {
+                    "is_test": false,
+                    "name": "round_name",
+                    "display_name": false,
+                    "time_to_answer": 50,
+                    "use_special_tactics": true
+                }
             }
         ]
     }

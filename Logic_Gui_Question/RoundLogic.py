@@ -44,7 +44,7 @@ class RoundLogic:
             self.method_on_click = method_on_click
 
             if method_on_click == 'doubleclick':
-                self.all_vision_question()
+                RoundLogic.all_vision_question(self)
                 x = self.list_round[self.count_double_round]
                 y = x["settings"]
 

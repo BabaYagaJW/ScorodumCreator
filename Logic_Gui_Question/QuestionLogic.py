@@ -41,6 +41,7 @@ class QuestionLogic:
         self.test_link = self
         self.link_round = link
         self.currentRowQuest = currentRowQuest
+        self.text_click = text_click
 
         if self.type_round == "blitz":
             self.question_gui.label_26.setEnabled(False)
@@ -133,116 +134,214 @@ class QuestionLogic:
 
 
     def on_save_question(self):
-        print('on_save_question')
-        print(self.count_double_round)
-        print(self.count_question)
-        try:
-            x = self.quest_dict[self.count_double_round][self.count_question]
-        except KeyError:
-            if self.type_round == "Блитц раунд":
-                z = JsonStruct.structure_blitz_question(self.blitz_counter,
-                                                                   self.question_gui.quest_text.text(),
-                                                                   self.question_gui.First_Choise.text())
-                self.list_quest.append(z)
+        if self.quest_text == "addquestion":
+            try:
+                x = self.quest_dict[self.count_double_round][self.count_question]
+            except KeyError:
+                if self.type_round == "Блитц раунд":
+                    z = JsonStruct.structure_blitz_question(self.blitz_counter,
+                                                                       self.question_gui.quest_text.text(),
+                                                                       self.question_gui.First_Choise.text())
+                    self.list_quest.append(z)
 
-                if not bool(self.quest_dict.get(self.count_item_round)):
-                    self.quest_dict[self.count_item_round] = self.list_quest
+                    if not bool(self.quest_dict.get(self.count_item_round)):
+                        self.quest_dict[self.count_item_round] = self.list_quest
+                    else:
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+
+                    self.blitz_counter += 1
                 else:
-                    self.quest_dict.update({self.count_item_round: self.list_quest})
+                    if self.question_gui.One_Correct.isChecked():
+                        self.correct_answer = self.question_gui.First_Choise.text()
+                    elif self.question_gui.Two_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Two_Choise.text()
+                    elif self.question_gui.Three_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Third_Choise.text()
+                    elif self.question_gui.Fourth_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Fourth_Choise.text()
+                    else:
+                        self.correct_answer = self.question_gui.First_Choise.text()
 
-                self.blitz_counter += 1
+
+                    z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
+                                                                          self.question_gui.quest_text.text(),
+                                                                          self.question_gui.First_Choise.text(),
+                                                                          self.question_gui.Two_Choise.text(),
+                                                                          self.question_gui.Third_Choise.text(),
+                                                                          self.question_gui.Fourth_Choise.text(),
+                                                                          self.correct_answer,
+                                                                          self.second_round)
+
+                    self.list_quest.append(z)
+
+                    if not bool(self.quest_dict.get(self.count_item_round)):
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+                    else:
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+            except IndexError:
+                    if self.type_round == "Блитц раунд":
+                        z = JsonStruct.structure_blitz_question(self.blitz_counter,
+                                                                           self.question_gui.quest_text.text(),
+                                                                           self.question_gui.First_Choise.text())
+                        self.list_quest.append(z)
+
+                        if not bool(self.quest_dict.get(self.count_item_round)):
+                            self.quest_dict[self.count_item_round] = dict(z)
+                        else:
+                            self.quest_dict.update({self.count_item_round: self.list_quest})
+
+                        self.blitz_counter += 1
+                    else:
+                        if self.question_gui.One_Correct.isChecked():
+                            self.correct_answer = self.question_gui.First_Choise.text()
+                        elif self.question_gui.Two_Correct.isChecked():
+                            self.correct_answer = self.question_gui.Two_Choise.text()
+                        elif self.question_gui.Three_Correct.isChecked():
+                            self.correct_answer = self.question_gui.Third_Choise.text()
+                        else:
+                            self.correct_answer = self.question_gui.Fourth_Choise.text()
+
+                        z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
+                                                                              self.question_gui.quest_text.text(),
+                                                                              self.question_gui.First_Choise.text(),
+                                                                              self.question_gui.Two_Choise.text(),
+                                                                              self.question_gui.Third_Choise.text(),
+                                                                              self.question_gui.Fourth_Choise.text(),
+                                                                              self.correct_answer,
+                                                                              self.second_round)
+
+                        self.list_quest.append(z)
+
+                        if not bool(self.quest_dict.get(self.count_item_round)):
+                            self.quest_dict.update({self.count_item_round: self.list_quest})
+                        else:
+                            self.quest_dict.update({self.count_item_round: self.list_quest})
             else:
-                if self.question_gui.One_Correct.isChecked():
-                    self.correct_answer = self.question_gui.First_Choise.text()
-                elif self.question_gui.Two_Correct.isChecked():
-                    self.correct_answer = self.question_gui.Two_Choise.text()
-                elif self.question_gui.Three_Correct.isChecked():
-                    self.correct_answer = self.question_gui.Third_Choise.text()
-                elif self.question_gui.Fourth_Correct.isChecked():
-                    self.correct_answer = self.question_gui.Fourth_Choise.text()
-                else:
-                    self.coorrect_answer = self.question_gui.First_Choise.text()
+                if self.type_round == "Блитц раунд":
 
-
-                z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
-                                                                      self.question_gui.quest_text.text(),
-                                                                      self.question_gui.First_Choise.text(),
-                                                                      self.question_gui.Two_Choise.text(),
-                                                                      self.question_gui.Third_Choise.text(),
-                                                                      self.question_gui.Fourth_Choise.text(),
-                                                                      self.correct_answer,
-                                                                      self.second_round)
-
-                print(type(z))
-
-                self.list_quest.append(z)
-
-                if not bool(self.quest_dict.get(self.count_item_round)):
-                    self.quest_dict.update({self.count_item_round: self.list_quest})
-                else:
-                    self.quest_dict.update({self.count_item_round: self.list_quest})
-        except IndexError:
-            if self.type_round == "Блитц раунд":
-                z = JsonStruct.structure_blitz_question(self.blitz_counter,
-                                                                   self.question_gui.quest_text.text(),
-                                                                   self.question_gui.First_Choise.text())
-                self.list_quest.append(z)
-
-                if not bool(self.quest_dict.get(self.count_item_round)):
-                    self.quest_dict[self.count_item_round] = dict(z)
-                else:
-                    self.quest_dict.update({self.count_item_round: self.list_quest})
-
-                self.blitz_counter += 1
-            else:
-                if self.question_gui.One_Correct.isChecked():
-                    self.correct_answer = self.question_gui.First_Choise.text()
-                elif self.question_gui.Two_Correct.isChecked():
-                    self.correct_answer = self.question_gui.Two_Choise.text()
-                elif self.question_gui.Three_Correct.isChecked():
-                    self.correct_answer = self.question_gui.Third_Choise.text()
-                else:
-                    self.correct_answer = self.question_gui.Fourth_Choise.text()
-
-                z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
-                                                                      self.question_gui.quest_text.text(),
-                                                                      self.question_gui.First_Choise.text(),
-                                                                      self.question_gui.Two_Choise.text(),
-                                                                      self.question_gui.Third_Choise.text(),
-                                                                      self.question_gui.Fourth_Choise.text(),
-                                                                      self.correct_answer,
-                                                                      self.second_round)
-
-                print(type(z))
-
-                self.list_quest.append(z)
-
-                if not bool(self.quest_dict.get(self.count_item_round)):
-                    self.quest_dict.update({self.count_item_round: self.list_quest})
-                else:
-                    self.quest_dict.update({self.count_item_round: self.list_quest})
-        else:
-            if self.type_round == "Блитц раунд":
-
-                x["question"] = self.question_gui.quest_text.text()
-                x["correct_answer"] = self.question_gui.First_Choise.text()
-            else:
-                y = x.get("answers")
-
-                x["type"] = self.question_gui.type_question.currentText()
-                x["question"] = self.question_gui.quest_text.text()
-                y[0] = self.question_gui.First_Choise.text()
-                y[1] = self.question_gui.Two_Choise.text()
-                y[2] = self.question_gui.Third_Choise.text()
-                y[3] = self.question_gui.Fourth_Choise.text()
-                if self.question_gui.One_Correct.isChecked():
+                    x["question"] = self.question_gui.quest_text.text()
                     x["correct_answer"] = self.question_gui.First_Choise.text()
-                elif self.question_gui.Two_Correct.isChecked():
-                    x["correct_answer"] = self.question_gui.Two_Choise.text()
-                elif self.question_gui.Three_Correct.isChecked():
-                    x["correct_answer"] = self.question_gui.Third_Choise.text()
                 else:
-                    x["correct_answer"] = self.question_gui.Fourth_Choise.text()
+                    y = x.get("answers")
+
+                    x["type"] = self.question_gui.type_question.currentText()
+                    x["question"] = self.question_gui.quest_text.text()
+                    y[0] = self.question_gui.First_Choise.text()
+                    y[1] = self.question_gui.Two_Choise.text()
+                    y[2] = self.question_gui.Third_Choise.text()
+                    y[3] = self.question_gui.Fourth_Choise.text()
+                    if self.question_gui.One_Correct.isChecked():
+                        x["correct_answer"] = self.question_gui.First_Choise.text()
+                    elif self.question_gui.Two_Correct.isChecked():
+                        x["correct_answer"] = self.question_gui.Two_Choise.text()
+                    elif self.question_gui.Three_Correct.isChecked():
+                        x["correct_answer"] = self.question_gui.Third_Choise.text()
+                    else:
+                        x["correct_answer"] = self.question_gui.Fourth_Choise.text()
+        else:
+            try:
+                x = self.quest_dict[self.count_double_round][self.currentRowQuest]
+            except KeyError:
+                if self.type_round == "Блитц раунд":
+                    z = JsonStruct.structure_blitz_question(self.blitz_counter,
+                                                            self.question_gui.quest_text.text(),
+                                                            self.question_gui.First_Choise.text())
+                    self.list_quest.append(z)
+
+                    if not bool(self.quest_dict.get(self.count_item_round)):
+                        self.quest_dict[self.count_item_round] = self.list_quest
+                    else:
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+
+                    self.blitz_counter += 1
+                else:
+                    if self.question_gui.One_Correct.isChecked():
+                        self.correct_answer = self.question_gui.First_Choise.text()
+                    elif self.question_gui.Two_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Two_Choise.text()
+                    elif self.question_gui.Three_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Third_Choise.text()
+                    elif self.question_gui.Fourth_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Fourth_Choise.text()
+                    else:
+                        self.correct_answer = self.question_gui.First_Choise.text()
+
+                    z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
+                                                               self.question_gui.quest_text.text(),
+                                                               self.question_gui.First_Choise.text(),
+                                                               self.question_gui.Two_Choise.text(),
+                                                               self.question_gui.Third_Choise.text(),
+                                                               self.question_gui.Fourth_Choise.text(),
+                                                               self.correct_answer,
+                                                               self.second_round)
+
+                    self.list_quest.append(z)
+
+                    if not bool(self.quest_dict.get(self.count_item_round)):
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+                    else:
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+            except IndexError:
+                if self.type_round == "Блитц раунд":
+                    z = JsonStruct.structure_blitz_question(self.blitz_counter,
+                                                            self.question_gui.quest_text.text(),
+                                                            self.question_gui.First_Choise.text())
+                    self.list_quest.append(z)
+
+                    if not bool(self.quest_dict.get(self.count_item_round)):
+                        self.quest_dict[self.count_item_round] = dict(z)
+                    else:
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+
+                    self.blitz_counter += 1
+                else:
+                    if self.question_gui.One_Correct.isChecked():
+                        self.correct_answer = self.question_gui.First_Choise.text()
+                    elif self.question_gui.Two_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Two_Choise.text()
+                    elif self.question_gui.Three_Correct.isChecked():
+                        self.correct_answer = self.question_gui.Third_Choise.text()
+                    else:
+                        self.correct_answer = self.question_gui.Fourth_Choise.text()
+
+                    z = JsonStruct.structure_question_settings(self.question_gui.type_question.currentText(),
+                                                               self.question_gui.quest_text.text(),
+                                                               self.question_gui.First_Choise.text(),
+                                                               self.question_gui.Two_Choise.text(),
+                                                               self.question_gui.Third_Choise.text(),
+                                                               self.question_gui.Fourth_Choise.text(),
+                                                               self.correct_answer,
+                                                               self.second_round)
+
+                    self.list_quest.append(z)
+
+                    if not bool(self.quest_dict.get(self.count_item_round)):
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+                    else:
+                        self.quest_dict.update({self.count_item_round: self.list_quest})
+            else:
+                print('test')
+                if self.type_round == "Блитц раунд":
+
+                    x["question"] = self.question_gui.quest_text.text()
+                    x["correct_answer"] = self.question_gui.First_Choise.text()
+                else:
+                    y = x.get("answers")
+
+                    x["type"] = self.question_gui.type_question.currentText()
+                    x["question"] = self.question_gui.quest_text.text()
+                    y[0] = self.question_gui.First_Choise.text()
+                    y[1] = self.question_gui.Two_Choise.text()
+                    y[2] = self.question_gui.Third_Choise.text()
+                    y[3] = self.question_gui.Fourth_Choise.text()
+                    if self.question_gui.One_Correct.isChecked():
+                        x["correct_answer"] = self.question_gui.First_Choise.text()
+                    elif self.question_gui.Two_Correct.isChecked():
+                        x["correct_answer"] = self.question_gui.Two_Choise.text()
+                    elif self.question_gui.Three_Correct.isChecked():
+                        x["correct_answer"] = self.question_gui.Third_Choise.text()
+                    else:
+                        x["correct_answer"] = self.question_gui.Fourth_Choise.text()
 
         self.window_quest.close()
         from Logic_Gui_Question.RoundLogic import RoundLogic
