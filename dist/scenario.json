@@ -4,7 +4,7 @@
             "name": "test",
             "theme": "test",
             "client": "test",
-            "date": "24.11.2024"
+            "date": "19.12.2024"
         },
         "game_settings": {
             "tactics": {
@@ -25,7 +25,81 @@
                     "display_name": false,
                     "time_to_answer": 50,
                     "use_special_tactics": true
-                }
+                },
+                "questions": [
+                    {
+                        "type": "select",
+                        "question": "test",
+                        "answers": [
+                            "123",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "123",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "tst",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "question": "test",
+                        "answers": [
+                            "123",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "123",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    }
+                ]
             }
         ]
     }

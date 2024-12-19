@@ -80,7 +80,6 @@ class RoundLogic:
 
 
         def on_double_click_quest(self):
-            print('doubleclick')
             window_quest = QuestionLogic(self.quest_dict,
                                        self.round_link,
                                        self.round_gui.Type_Round.currentText(),

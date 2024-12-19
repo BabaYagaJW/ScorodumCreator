@@ -20,188 +20,7 @@
             {
                 "type": "classical",
                 "settings": {
-                    "is_test": false,
-                    "name": "round_name",
-                    "display_name": false,
-                    "time_to_answer": 180,
-                    "use_special_tactics": true,
-                    "blitz_score": 50
-                },
-                "questions": [
-                    {
-                        "type": "select",
-                        "question": "test",
-                        "answers": [
-                            "123",
-                            "",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "test",
-                        "answers": [
-                            "",
-                            "",
-                            "t",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "ttt",
-                        "answers": [
-                            "",
-                            "",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "sas",
-                        "answers": [
-                            "",
-                            "",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "s1232134",
-                        "answers": [
-                            "",
-                            "3241fdd",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "sss",
-                        "answers": [
-                            "",
-                            "3241fdd",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 50,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    },
-                    {
-                        "type": "select",
-                        "question": "успешный тест",
-                        "answers": [
-                            "",
-                            "",
-                            "",
-                            ""
-                        ],
-                        "correct_answer": "",
-                        "time_to_answer": 180,
-                        "media_data": {
-                            "show_image": false,
-                            "video": {
-                                "before": "",
-                                "after": ""
-                            },
-                            "image": {
-                                "before": "",
-                                "after": "",
-                                "player_displayed": false
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                "type": "classical",
-                "settings": {
-                    "is_test": false,
+                    "is_test": true,
                     "name": "round_name",
                     "display_name": false,
                     "time_to_answer": 50,
@@ -210,8 +29,56 @@
                 },
                 "questions": [
                     {
+                        "type": "text",
+                        "question": "похуй",
+                        "answers": [
+                            "123",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "123",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "question": "test",
+                        "answers": [
+                            "123",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "123",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
                         "type": "select",
-                        "question": "успешный тест",
+                        "question": "тест",
                         "answers": [
                             "",
                             "",
@@ -219,6 +86,30 @@
                             ""
                         ],
                         "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "выфв",
+                        "answers": [
+                            "3123",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "3123",
                         "time_to_answer": 50,
                         "media_data": {
                             "show_image": false,

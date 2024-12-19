@@ -23,8 +23,11 @@ class QuestionLogic:
         self.question_gui.Two_Correct.clicked.connect(self.on_two_correct)
         self.question_gui.Three_Correct.clicked.connect(self.on_three_correct)
         self.question_gui.Fourth_Correct.clicked.connect(self.on_fourth_correct)
-        self.question_gui.Save_Question.clicked.connect(self.on_save_question)
         self.question_gui.type_question.currentTextChanged.connect(self.on_type_question)
+        if text_click == "addquestion":
+            self.question_gui.Save_Question.clicked.connect(self.on_save_question)
+        else:
+            self.question_gui.Save_Question.clicked.connect(self.save_question_replay)
 
         self.Type_Quest = ""
         self.quest_text = ""
@@ -139,6 +142,39 @@ class QuestionLogic:
                         self.question_gui.Two_Correct.setEnabled(False)
                         self.question_gui.Three_Correct.setEnabled(False)
                         self.question_gui.One_Correct.setEnabled(False)
+
+    def save_question_replay(self):
+        try:
+            x = self.quest_dict[self.count_double_round][self.currentRowQuest]
+            print('Повторное сохранение раунда')
+        except KeyError:
+            print('ошибочка')
+        else:
+            if self.type_round == "Блитц раунд":
+
+                x["question"] = self.question_gui.quest_text.text()
+                x["correct_answer"] = self.question_gui.First_Choise.text()
+            else:
+                y = x.get("answers")
+
+                x["type"] = self.question_gui.type_question.currentText()
+                x["question"] = self.question_gui.quest_text.text()
+                y[0] = self.question_gui.First_Choise.text()
+                y[1] = self.question_gui.Two_Choise.text()
+                y[2] = self.question_gui.Third_Choise.text()
+                y[3] = self.question_gui.Fourth_Choise.text()
+                if self.question_gui.One_Correct.isChecked():
+                    x["correct_answer"] = self.question_gui.First_Choise.text()
+                elif self.question_gui.Two_Correct.isChecked():
+                    x["correct_answer"] = self.question_gui.Two_Choise.text()
+                elif self.question_gui.Three_Correct.isChecked():
+                    x["correct_answer"] = self.question_gui.Third_Choise.text()
+                else:
+                    x["correct_answer"] = self.question_gui.Fourth_Choise.text()
+
+        self.window_quest.close()
+        from Logic_Gui_Question.RoundLogic import RoundLogic
+        RoundLogic.all_vision_question(self.link_round)
 
     def on_save_question(self):
         if self.on_click_round == "addclick":
@@ -462,11 +498,10 @@ class QuestionLogic:
                         else:
                             x["correct_answer"] = self.question_gui.Fourth_Choise.text()
 
-
-
         self.window_quest.close()
         from Logic_Gui_Question.RoundLogic import RoundLogic
         RoundLogic.all_vision_question(self.link_round)
+
 
     def on_type_question(self):
         if self.question_gui.type_question.currentText() == "text":
@@ -498,6 +533,7 @@ class QuestionLogic:
             self.question_gui.Three_Correct.setEnabled(True)
             self.question_gui.One_Correct.setChecked(False)
             self.question_gui.One_Correct.setEnabled(True)
+
     # Нажатие на кнопку с отметкой о правильном ответе
     def on_one_correct(self):
         if self.question_gui.One_Correct.isChecked():
