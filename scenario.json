@@ -4,7 +4,7 @@
             "name": "test",
             "theme": "test",
             "client": "test",
-            "date": "10.12.2024"
+            "date": "19.12.2024"
         },
         "game_settings": {
             "tactics": {
@@ -23,7 +23,7 @@
                     "is_test": false,
                     "name": "round_name",
                     "display_name": false,
-                    "time_to_answer": 50,
+                    "time_to_answer": 180,
                     "use_special_tactics": true,
                     "blitz_score": 50
                 },
@@ -35,10 +35,154 @@
                             "123",
                             "",
                             "",
-                            "23"
+                            ""
                         ],
-                        "correct_answer": "23",
+                        "correct_answer": "",
                         "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "test",
+                        "answers": [
+                            "",
+                            "",
+                            "t",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "ttt",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "sas",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "s1232134",
+                        "answers": [
+                            "",
+                            "3241fdd",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "sss",
+                        "answers": [
+                            "",
+                            "3241fdd",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    },
+                    {
+                        "type": "select",
+                        "question": "успешный тест",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 180,
                         "media_data": {
                             "show_image": false,
                             "video": {
@@ -61,8 +205,35 @@
                     "name": "round_name",
                     "display_name": false,
                     "time_to_answer": 50,
-                    "use_special_tactics": true
-                }
+                    "use_special_tactics": true,
+                    "blitz_score": 50
+                },
+                "questions": [
+                    {
+                        "type": "select",
+                        "question": "успешный тест",
+                        "answers": [
+                            "",
+                            "",
+                            "",
+                            ""
+                        ],
+                        "correct_answer": "",
+                        "time_to_answer": 50,
+                        "media_data": {
+                            "show_image": false,
+                            "video": {
+                                "before": "",
+                                "after": ""
+                            },
+                            "image": {
+                                "before": "",
+                                "after": "",
+                                "player_displayed": false
+                            }
+                        }
+                    }
+                ]
             }
         ]
     }

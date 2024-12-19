@@ -65,17 +65,6 @@ class RoundLogic:
                     self.round_gui.Test_Round.setChecked(False)
                     self.round_gui.Second_Round.setValue(y["time_to_answer"])
 
-        def on_add_quest(self):
-            window_quest = QuestionLogic(self.quest_dict,
-                                       self.round_link,
-                                        self.round_gui.Type_Round.currentText(),
-                                        self.count_item_round,
-                                        self.count_double_round,
-                                        self.round_gui.All_Question.count(),
-                                        self.list_quest,
-                                        self.round_gui.Second_Round.value(),
-                                        self.round_gui.All_Question.currentRow(),
-                                        "addquestion")
 
 
         def show_question(self):
@@ -91,6 +80,7 @@ class RoundLogic:
 
 
         def on_double_click_quest(self):
+            print('doubleclick')
             window_quest = QuestionLogic(self.quest_dict,
                                        self.round_link,
                                        self.round_gui.Type_Round.currentText(),
@@ -100,7 +90,21 @@ class RoundLogic:
                                        self.list_quest,
                                        self.round_gui.Second_Round.value(),
                                        self.round_gui.All_Question.currentRow(),
-                                       "doubleclick")
+                                       "doubleclick",
+                                         self.method_on_click)
+
+        def on_add_quest(self):
+            window_quest = QuestionLogic(self.quest_dict,
+                                       self.round_link,
+                                        self.round_gui.Type_Round.currentText(),
+                                        self.count_item_round,
+                                        self.count_double_round,
+                                        self.round_gui.All_Question.count(),
+                                        self.list_quest,
+                                        self.round_gui.Second_Round.value(),
+                                        self.round_gui.All_Question.currentRow(),
+                                        "addquestion",
+                                         self.method_on_click)
 
         def on_type_round(self):
             if self.round_gui.Type_Round.currentText() == "classical":
@@ -187,8 +191,6 @@ class RoundLogic:
                         else:
                             self.round_gui.All_Question.insertItem(self.round_gui.All_Question.count(),
                                                                      "Свободный ответ")
-
-            self.list_quest = self.quest_dict.get(self.count_item_round)
 
         def closeEvent(self, event):
             self.list_quest = []
